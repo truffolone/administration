@@ -6,7 +6,8 @@ Class User {
         $this->ci =& get_instance();
 
         //loading users model
-        $this->ci->load->model("users");
+        $this->ci->load->model("users_model");
+        $this->ci->load->model("groups_model");
     }
 
     /* 
