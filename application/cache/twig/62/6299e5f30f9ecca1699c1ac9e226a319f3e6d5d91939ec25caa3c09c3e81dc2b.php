@@ -53,35 +53,98 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     <meta name=\"description\" content=\"\">
     <meta name=\"author\" content=\"\">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"";
+        // line 30
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-57x57.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"60x60\" href=\"";
+        // line 31
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-60x60.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"";
+        // line 32
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-72x72.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"";
+        // line 33
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-76x76.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"";
+        // line 34
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-114x114.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"";
+        // line 35
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-120x120.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"144x144\" href=\"";
+        // line 36
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-144x144.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"152x152\" href=\"";
+        // line 37
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-152x152.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"";
+        // line 38
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/apple-icon-180x180.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"192x192\"  href=\"";
+        // line 39
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/android-icon-192x192.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"";
+        // line 40
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/favicon-32x32.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"";
+        // line 41
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/favicon-96x96.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"";
+        // line 42
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/favicon-16x16.png\">
+    <link rel=\"manifest\" href=\"";
+        // line 43
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/manifest.json\">
+    <meta name=\"msapplication-TileColor\" content=\"#ffffff\">
+    <meta name=\"msapplication-TileImage\" content=\"";
+        // line 45
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/icon/ms-icon-144x144.png\">
+    <meta name=\"theme-color\" content=\"#ffffff\">
+
+    <title>Echo Creative Company</title>
 
     <!-- Bootstrap Core CSS -->
     <link href=\"";
-        // line 33
+        // line 51
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/bootstrap.min.css\" rel=\"stylesheet\">
 
     <!-- MetisMenu CSS -->
     <link href=\"";
-        // line 36
+        // line 54
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/metisMenu/metisMenu.min.css\" rel=\"stylesheet\">
 
     <!-- Custom CSS -->
     <link href=\"";
-        // line 39
+        // line 57
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/style.css\" rel=\"stylesheet\">
 
     <!-- Morris Charts CSS -->
     <link href=\"";
-        // line 42
+        // line 60
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/morrisjs/morris.css\" rel=\"stylesheet\">
 
     <!-- Custom Fonts -->
     <link href=\"";
-        // line 45
+        // line 63
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/font-awesome/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">
 
@@ -976,39 +1039,39 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     <!-- jQuery -->
     <script src=\"";
-        // line 937
+        // line 955
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/jquery/jquery.min.js\"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src=\"";
-        // line 940
+        // line 958
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/bootstrap/bootstrap.min.js\"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src=\"";
-        // line 943
+        // line 961
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/metisMenu/metisMenu.min.js\"></script>
 
     <!-- Morris Charts JavaScript -->
     <script src=\"";
-        // line 946
+        // line 964
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/raphael/raphael.min.js\"></script>
     <script src=\"";
-        // line 947
+        // line 965
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/morrisjs/morris.min.js\"></script>
     <script src=\"";
-        // line 948
+        // line 966
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/data/morris-data.js\"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src=\"";
-        // line 951
+        // line 969
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/custom.js\"></script>
 
@@ -1023,7 +1086,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     {
         // line 5
         echo "            <link rel=\"stylesheet\" href=\"";
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/style.css\" />
             <title>";
         // line 6
@@ -1063,7 +1126,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     public function getDebugInfo()
     {
-        return array (  1048 => 13,  1045 => 12,  1040 => 10,  1030 => 6,  1025 => 5,  1022 => 4,  1012 => 951,  1006 => 948,  1002 => 947,  998 => 946,  992 => 943,  986 => 940,  980 => 937,  85 => 45,  79 => 42,  73 => 39,  67 => 36,  61 => 33,  41 => 15,  39 => 12,  34 => 10,  30 => 8,  28 => 4,  23 => 1,);
+        return array (  1111 => 13,  1108 => 12,  1103 => 10,  1093 => 6,  1088 => 5,  1085 => 4,  1075 => 969,  1069 => 966,  1065 => 965,  1061 => 964,  1055 => 961,  1049 => 958,  1043 => 955,  148 => 63,  142 => 60,  136 => 57,  130 => 54,  124 => 51,  115 => 45,  110 => 43,  106 => 42,  102 => 41,  98 => 40,  94 => 39,  90 => 38,  86 => 37,  82 => 36,  78 => 35,  74 => 34,  70 => 33,  66 => 32,  62 => 31,  58 => 30,  41 => 15,  39 => 12,  34 => 10,  30 => 8,  28 => 4,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -1080,7 +1143,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 <html>
     <head>
         {% block head %}
-            <link rel=\"stylesheet\" href=\"{{ base_url() }}public/style.css\" />
+            <link rel=\"stylesheet\" href=\"{{ base_url }}public/style.css\" />
             <title>{% block title %}{% endblock %} - Echo System</title>
         {% endblock %}
     </head>
@@ -1105,7 +1168,25 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     <meta name=\"description\" content=\"\">
     <meta name=\"author\" content=\"\">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"{{ base_url }}public/icon/apple-icon-57x57.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"60x60\" href=\"{{ base_url }}public/icon/apple-icon-60x60.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"{{ base_url }}public/icon/apple-icon-72x72.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"{{ base_url }}public/icon/apple-icon-76x76.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"{{ base_url }}public/icon/apple-icon-114x114.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"{{ base_url }}public/icon/apple-icon-120x120.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"144x144\" href=\"{{ base_url }}public/icon/apple-icon-144x144.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"152x152\" href=\"{{ base_url }}public/icon/apple-icon-152x152.png\">
+    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"{{ base_url }}public/icon/apple-icon-180x180.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"192x192\"  href=\"{{ base_url }}public/icon/android-icon-192x192.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"{{ base_url }}public/icon/favicon-32x32.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"{{ base_url }}public/icon/favicon-96x96.png\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"{{ base_url }}public/icon/favicon-16x16.png\">
+    <link rel=\"manifest\" href=\"{{ base_url }}public/icon/manifest.json\">
+    <meta name=\"msapplication-TileColor\" content=\"#ffffff\">
+    <meta name=\"msapplication-TileImage\" content=\"{{ base_url }}public/icon/ms-icon-144x144.png\">
+    <meta name=\"theme-color\" content=\"#ffffff\">
+
+    <title>Echo Creative Company</title>
 
     <!-- Bootstrap Core CSS -->
     <link href=\"{{ base_url }}public/css/bootstrap.min.css\" rel=\"stylesheet\">
