@@ -5,6 +5,6 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->twig->display('layouts/default');
+		$this->twig->display('welcome');
 	}
 }

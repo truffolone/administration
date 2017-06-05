@@ -74,3 +74,21 @@ DEBUG - 2017-06-05 14:53:48 --> Total execution time: 0.0047
 DEBUG - 2017-06-05 15:10:35 --> UTF-8 Support Enabled
 DEBUG - 2017-06-05 15:10:35 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2017-06-05 15:10:35 --> Total execution time: 0.0152
+DEBUG - 2017-06-05 15:51:44 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:51:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-06-05 15:51:44 --> Severity: error --> Exception: Unexpected "}". /var/www/html/echosystem/administration/application/views/welcome.twig 534
+DEBUG - 2017-06-05 15:51:44 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:51:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-06-05 15:51:44 --> 404 Page Not Found: Faviconico/index
+DEBUG - 2017-06-05 15:52:01 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:52:01 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-06-05 15:52:01 --> Severity: error --> Exception: The block 'head' has already been defined line 4. /var/www/html/echosystem/administration/application/views/layouts/default.twig 23
+DEBUG - 2017-06-05 15:52:02 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:52:02 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-06-05 15:52:02 --> 404 Page Not Found: Faviconico/index
+DEBUG - 2017-06-05 15:53:05 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:53:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-06-05 15:53:05 --> Total execution time: 0.0406
+DEBUG - 2017-06-05 15:53:38 --> UTF-8 Support Enabled
+DEBUG - 2017-06-05 15:53:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-06-05 15:53:38 --> Total execution time: 0.0126
