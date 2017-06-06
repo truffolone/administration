@@ -11,6 +11,7 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
         $this->parent = $this->loadTemplate("layouts/default.twig", "users/add.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
+            'content_title' => array($this, 'block_content_title'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -32,13 +33,43 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
     }
 
     // line 5
+    public function block_content_title($context, array $blocks = array())
+    {
+        echo "Aggiungi un Utente";
+    }
+
+    // line 7
     public function block_content($context, array $blocks = array())
     {
-        // line 6
-        echo "    <h1>Aggiungi un Utente</h1>
-    <p class=\"important\">
-        Utente
-    </p>
+        // line 8
+        echo "    <div class=\"col-md-12\">
+        ";
+        // line 9
+        echo form_open();
+        echo "
+            <div class=\"form-group col-md-3\">
+                <label for=\"email\">Email <span class=\"red\">*</span>:</label>
+            </div>
+            <div class=\"form-group col-md-9\">
+                <input type=\"email\" name=\"email\" class=\"form-control\" id=\"email\" required>
+            </div>
+            <div class=\"form-group col-md-3\">
+                <label for=\"username\">Username <span class=\"red\">*</span>:</label>
+            </div>
+            <div class=\"form-group col-md-9\">
+                <input type=\"text\" name=\"username\" class=\"form-control\" id=\"username\" required>
+            </div>
+            <div class=\"form-group col-md-3\">
+                <label for=\"password\">Password <span class=\"red\">*</span>:</label>
+            </div> 
+            <div class=\"form-group col-md-9\">
+                <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required>
+            </div>
+        ";
+        // line 28
+        echo form_close();
+        echo "
+    </div>
 ";
     }
 
@@ -54,7 +85,7 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
 
     public function getDebugInfo()
     {
-        return array (  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  70 => 28,  48 => 9,  45 => 8,  42 => 7,  36 => 5,  30 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -71,11 +102,31 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
 
 {% block title %}Aggiungi Utente{% endblock %}
 
+{% block content_title %}Aggiungi un Utente{% endblock %}
+
 {% block content %}
-    <h1>Aggiungi un Utente</h1>
-    <p class=\"important\">
-        Utente
-    </p>
+    <div class=\"col-md-12\">
+        {{ form_open() }}
+            <div class=\"form-group col-md-3\">
+                <label for=\"email\">Email <span class=\"red\">*</span>:</label>
+            </div>
+            <div class=\"form-group col-md-9\">
+                <input type=\"email\" name=\"email\" class=\"form-control\" id=\"email\" required>
+            </div>
+            <div class=\"form-group col-md-3\">
+                <label for=\"username\">Username <span class=\"red\">*</span>:</label>
+            </div>
+            <div class=\"form-group col-md-9\">
+                <input type=\"text\" name=\"username\" class=\"form-control\" id=\"username\" required>
+            </div>
+            <div class=\"form-group col-md-3\">
+                <label for=\"password\">Password <span class=\"red\">*</span>:</label>
+            </div> 
+            <div class=\"form-group col-md-9\">
+                <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required>
+            </div>
+        {{ form_close() }}
+    </div>
 {% endblock %}", "users/add.twig", "/var/www/html/echosystem/administration/application/views/users/add.twig");
     }
 }

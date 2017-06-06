@@ -2,9 +2,29 @@
 
 {% block title %}Aggiungi Utente{% endblock %}
 
+{% block content_title %}Aggiungi un Utente{% endblock %}
+
 {% block content %}
-    <h1>Aggiungi un Utente</h1>
-    <p class="important">
-        Utente
-    </p>
+    <div class="col-md-12">
+        {{ form_open() }}
+            <div class="form-group col-md-3">
+                <label for="email">Email <span class="red">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="username">Username <span class="red">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <input type="text" name="username" class="form-control" id="username" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="password">Password <span class="red">*</span>:</label>
+            </div> 
+            <div class="form-group col-md-9">
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+        {{ form_close() }}
+    </div>
 {% endblock %}

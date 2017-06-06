@@ -18,6 +18,7 @@ class Users extends CI_Controller {
      * Add User
      */
      public function add() {
+         $this->load->helper("form");
          $this->twig->display("users/add");
      }
 
