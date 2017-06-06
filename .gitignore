@@ -1,1 +1,3 @@
 sessions/*
+application/cache/*
+application/logs/*
