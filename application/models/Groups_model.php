@@ -19,4 +19,5 @@ class Groups_model extends CI_Model {
             log_message("debug", "looking for groups from user ID " . $id . " but nothing was found");
             return null;
         }
+    }
 }

@@ -42,34 +42,38 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
     public function block_content($context, array $blocks = array())
     {
         // line 8
-        echo "    <div class=\"col-md-12\">
+        echo "    <div class=\"col-md-6\">
         ";
         // line 9
         echo form_open();
         echo "
             <div class=\"form-group col-md-3\">
-                <label for=\"email\">Email <span class=\"red\">*</span>:</label>
+                <label for=\"email\">Email <span class=\"text-danger\">*</span>:</label>
             </div>
             <div class=\"form-group col-md-9\">
                 <input type=\"email\" name=\"email\" class=\"form-control\" id=\"email\" required>
             </div>
             <div class=\"form-group col-md-3\">
-                <label for=\"username\">Username <span class=\"red\">*</span>:</label>
+                <label for=\"username\">Username <span class=\"text-danger\">*</span>:</label>
             </div>
             <div class=\"form-group col-md-9\">
                 <input type=\"text\" name=\"username\" class=\"form-control\" id=\"username\" required>
             </div>
             <div class=\"form-group col-md-3\">
-                <label for=\"password\">Password <span class=\"red\">*</span>:</label>
+                <label for=\"password\">Password <span class=\"text-danger\">*</span>:</label>
             </div> 
             <div class=\"form-group col-md-9\">
                 <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required>
             </div>
+            <div class=\"form-group col-md-12\">
+                <input class=\"btn btn-default btn-info pull-right\" type=\"submit\" value=\"Crea L'utente\" id=\"submit\">
+            </div>
         ";
-        // line 28
+        // line 31
         echo form_close();
         echo "
     </div>
+    <div class=\"col-md-6\"></div>
 ";
     }
 
@@ -85,7 +89,7 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
 
     public function getDebugInfo()
     {
-        return array (  70 => 28,  48 => 9,  45 => 8,  42 => 7,  36 => 5,  30 => 3,  11 => 1,);
+        return array (  73 => 31,  48 => 9,  45 => 8,  42 => 7,  36 => 5,  30 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -105,28 +109,32 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
 {% block content_title %}Aggiungi un Utente{% endblock %}
 
 {% block content %}
-    <div class=\"col-md-12\">
+    <div class=\"col-md-6\">
         {{ form_open() }}
             <div class=\"form-group col-md-3\">
-                <label for=\"email\">Email <span class=\"red\">*</span>:</label>
+                <label for=\"email\">Email <span class=\"text-danger\">*</span>:</label>
             </div>
             <div class=\"form-group col-md-9\">
                 <input type=\"email\" name=\"email\" class=\"form-control\" id=\"email\" required>
             </div>
             <div class=\"form-group col-md-3\">
-                <label for=\"username\">Username <span class=\"red\">*</span>:</label>
+                <label for=\"username\">Username <span class=\"text-danger\">*</span>:</label>
             </div>
             <div class=\"form-group col-md-9\">
                 <input type=\"text\" name=\"username\" class=\"form-control\" id=\"username\" required>
             </div>
             <div class=\"form-group col-md-3\">
-                <label for=\"password\">Password <span class=\"red\">*</span>:</label>
+                <label for=\"password\">Password <span class=\"text-danger\">*</span>:</label>
             </div> 
             <div class=\"form-group col-md-9\">
                 <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required>
             </div>
+            <div class=\"form-group col-md-12\">
+                <input class=\"btn btn-default btn-info pull-right\" type=\"submit\" value=\"Crea L'utente\" id=\"submit\">
+            </div>
         {{ form_close() }}
     </div>
+    <div class=\"col-md-6\"></div>
 {% endblock %}", "users/add.twig", "/var/www/html/echosystem/administration/application/views/users/add.twig");
     }
 }
