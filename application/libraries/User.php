@@ -6,7 +6,6 @@ Class User {
     private $username = null;
     private $email = null;
     private $password = null;
-    private $salt = null;
     private $created = null;
     private $last_edit = null;
     private $active = null;
@@ -49,11 +48,36 @@ Class User {
     }
 
     /*
-     * Save new user or edit it based on defined $id;
+     * Save new user or edit it based on predefined $this->id;
      */
      public function save() {
-         
+         $this->ci->load->model("user_model");
+         if($this->id != null) {
+            $this->id = $this->ci->user_model->register_user($this->username, $this->email, $this->password, true);
+            if(!$this->id) {
+                log_message("error", "Trying to register user but something went wrong:\n " . $this->ci->db->last_query());
+                return false;
+            } else {
+                return $this->id;
+            }
+         } else {
+            if(!$this->ci->user_model->update_user($this->id, $this->username, $this->email, $this->password, true)) {
+                log_message("error", "Trying to update user (ID: " . $this->id . ") but something went wrong:\n " . $this->ci->db->last_query());
+                return false;
+            } else {
+                return $this;
+            }
+         }
      }
+
+    /*
+    * hash user password and setup salt and hashed password
+    */
+    public function hashPassword(string $password) {
+        $p = password_hash($password, PASSWORD_BCRYPT);
+
+        return $p;
+    }
 
     /*
      * Setters and getters
