@@ -11,7 +11,17 @@ class Users extends CI_Controller {
      * Show users list
      */
     public function index() {
+        #loading base  model
+        $this->load->model("users_model");
 
+        #page settings
+        $page    = $this->input->get("page")    ? $this->input->get("page")     : 1;
+        $perpage = $this->input->get("perpage") ? $this->input->get("perpage")  : 20;
+        $orderby = $this->input->get("orderby") ? $this->input->get("orderby")  : "id";
+        $order   = $this->input->get("order")   ? $this->input->get("order")    : "DESC";
+
+        #getting user list with custom function
+        $ulist = $this->users_model->getFullUsersList($page, $perpage, $orderby, $order);
     }
 
     /*

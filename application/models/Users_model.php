@@ -58,7 +58,7 @@ class Users_model extends CI_Model {
     }
 
     /*
-     *
+     * Update user groups
      */
     public function updateGroups(int $user_id, array $groups) : bool {
         #removing user groups
@@ -78,5 +78,31 @@ class Users_model extends CI_Model {
         }
 
         return true;
+    }
+
+    /*
+     * load all users with a custom function
+     */
+    public function getFullUsersList(int $page, int $perpage, string $orderby, string $order) {
+        #limiting orderby
+        $orderByLimit = array("u.id", "u.username");
+
+        #base vars definition
+        $orderby = in_array($order, $orderByLimit) ? $orderby : $orderByLimit[0];
+        $order   = (strtoupper($order) == "ASC")   ? "ASC"    : "DESC";
+        $page    = ($page < 1)                     ? 1        : $page;
+        $limit   = ($perpage > 1)                  ? $perpage : 20;
+        $offset  = ($page - 1) * $perpage;
+
+        #query builder
+        $query = "SELECT u.id, u.username
+                  FROM users u
+                  ORDER BY " . $orderby . " " . $order . "
+                  LIMIT " . $limit . ", " . $offset;
+
+        #executing query
+        $result = $this->db->query($query);
+
+        return $result;
     }
 }
