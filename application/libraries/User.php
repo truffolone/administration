@@ -40,17 +40,15 @@ Class User {
      * Save new user or edit it based on predefined $this->id;
      */
     public function save() {
-        $this->ci->load->model("user_model");
-
         #saving into the user table
-        if($this->id != null) {
-            $this->id = $this->ci->user_model->register_user($this->username, $this->email, $this->password, $this->active);
+        if($this->id == null) {
+            $this->id = $this->ci->users_model->register_user($this->username, $this->email, $this->password, $this->active);
             if(!$this->id) {
                 log_message("error", "Trying to register user but something went wrong:\n " . $this->ci->db->last_query());
                 return false;
             }
         } else {
-            if(!$this->ci->user_model->update_user($this->id, $this->username, $this->email, $this->password, $this->active)) {
+            if(!$this->ci->users_model->update_user($this->id, $this->username, $this->email, $this->password, $this->active)) {
                 log_message("error", "Trying to update user (ID: " . $this->id . ") but something went wrong:\n " . $this->ci->db->last_query());
                 return false;
             }

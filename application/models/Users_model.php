@@ -27,8 +27,8 @@ class Users_model extends CI_Model {
                                         'username'      => $username,
                                         'email'         => $email,
                                         'password'      => $password,
-                                        'created'       => 'now()',
-                                        'last_update'   => 'now()',
+                                        'created'       => date('Y-m-d H:i:s'),
+                                        'last_update'   => date('Y-m-d H:i:s'),
                                         'active'        => $active
                                     ));
         if($result === false) {
@@ -47,7 +47,7 @@ class Users_model extends CI_Model {
                                         'username'      => $username,
                                         'email'         => $email,
                                         'password'      => $password,
-                                        'last_update'   => 'now()',
+                                        'last_update'   => date('Y-m-d H:i:s'),
                                         'active'        => $active
                                     ));
         if($result === false) {
