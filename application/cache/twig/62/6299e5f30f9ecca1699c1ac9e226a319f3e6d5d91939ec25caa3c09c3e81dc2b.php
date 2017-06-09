@@ -366,10 +366,71 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
         </nav>
 
         <div id=\"page-wrapper\">
-            <div class=\"row\">
+            ";
+        // line 392
+        if ((($context["systemError"] ?? null) != null)) {
+            // line 393
+            echo "                <div class=\"row\">
+                    <div class=\"alert alert-danger col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Stop!</strong> ";
+            // line 396
+            echo ($context["systemError"] ?? null);
+            echo "
+                    </div>
+                </div>
+            ";
+        }
+        // line 400
+        echo "            ";
+        if ((($context["systemWarning"] ?? null) != null)) {
+            // line 401
+            echo "                <div class=\"row\">
+                    <div class=\"alert alert-warning col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Warning!</strong> ";
+            // line 404
+            echo ($context["systemWarning"] ?? null);
+            echo "
+                    </div>
+                </div>
+            ";
+        }
+        // line 408
+        echo "            ";
+        if ((($context["systemInfo"] ?? null) != null)) {
+            // line 409
+            echo "                <div class=\"row\">
+                    <div class=\"alert alert-info col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Info!</strong> ";
+            // line 412
+            echo ($context["systemInfo"] ?? null);
+            echo "
+                    </div>
+                </div>
+            ";
+        }
+        // line 416
+        echo "            ";
+        if ((($context["systemSuccess"] ?? null) != null)) {
+            // line 417
+            echo "                <div class=\"row\">
+                    <div class=\"alert alert-success col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Success!</strong> ";
+            // line 420
+            echo ($context["systemSuccess"] ?? null);
+            echo "
+                    </div>
+                </div>
+            ";
+        }
+        // line 424
+        echo "            <div class=\"row\">
                 <div class=\"col-lg-12\">
                     <h1 class=\"page-header\">";
-        // line 394
+        // line 426
         $this->displayBlock('content_title', $context, $blocks);
         echo "</h1>
                 </div>
@@ -378,9 +439,9 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
             <!-- /.row -->
             <div class=\"row\">
                 ";
-        // line 400
+        // line 432
         $this->displayBlock('content', $context, $blocks);
-        // line 401
+        // line 433
         echo "            </div>
             <!-- /.row -->
         </div>
@@ -391,39 +452,39 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     <!-- jQuery -->
     <script src=\"";
-        // line 410
+        // line 442
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/jquery/jquery.min.js\"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src=\"";
-        // line 413
+        // line 445
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/bootstrap/bootstrap.min.js\"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src=\"";
-        // line 416
+        // line 448
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/metisMenu/metisMenu.min.js\"></script>
 
     <!-- Morris Charts JavaScript -->
     <script src=\"";
-        // line 419
+        // line 451
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/raphael/raphael.min.js\"></script>
     <script src=\"";
-        // line 420
+        // line 452
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/morrisjs/morris.min.js\"></script>
     <script src=\"";
-        // line 421
+        // line 453
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/data/morris-data.js\"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src=\"";
-        // line 424
+        // line 456
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/js/custom.js\"></script>
 
@@ -555,12 +616,12 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     {
     }
 
-    // line 394
+    // line 426
     public function block_content_title($context, array $blocks = array())
     {
     }
 
-    // line 400
+    // line 432
     public function block_content($context, array $blocks = array())
     {
     }
@@ -577,7 +638,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     public function getDebugInfo()
     {
-        return array (  564 => 400,  559 => 394,  554 => 30,  541 => 45,  535 => 42,  529 => 39,  523 => 36,  517 => 33,  511 => 30,  505 => 27,  500 => 25,  496 => 24,  492 => 23,  488 => 22,  484 => 21,  480 => 20,  476 => 19,  472 => 18,  468 => 17,  464 => 16,  460 => 15,  456 => 14,  452 => 13,  448 => 12,  440 => 6,  437 => 5,  427 => 424,  421 => 421,  417 => 420,  413 => 419,  407 => 416,  401 => 413,  395 => 410,  384 => 401,  382 => 400,  373 => 394,  31 => 54,  29 => 5,  23 => 1,);
+        return array (  625 => 432,  620 => 426,  615 => 30,  602 => 45,  596 => 42,  590 => 39,  584 => 36,  578 => 33,  572 => 30,  566 => 27,  561 => 25,  557 => 24,  553 => 23,  549 => 22,  545 => 21,  541 => 20,  537 => 19,  533 => 18,  529 => 17,  525 => 16,  521 => 15,  517 => 14,  513 => 13,  509 => 12,  501 => 6,  498 => 5,  488 => 456,  482 => 453,  478 => 452,  474 => 451,  468 => 448,  462 => 445,  456 => 442,  445 => 433,  443 => 432,  434 => 426,  430 => 424,  423 => 420,  418 => 417,  415 => 416,  408 => 412,  403 => 409,  400 => 408,  393 => 404,  388 => 401,  385 => 400,  378 => 396,  373 => 393,  371 => 392,  31 => 54,  29 => 5,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -981,6 +1042,38 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
         </nav>
 
         <div id=\"page-wrapper\">
+            {% if systemError != null %}
+                <div class=\"row\">
+                    <div class=\"alert alert-danger col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Stop!</strong> {{ systemError|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemWarning != null %}
+                <div class=\"row\">
+                    <div class=\"alert alert-warning col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Warning!</strong> {{ systemWarning|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemInfo != null %}
+                <div class=\"row\">
+                    <div class=\"alert alert-info col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Info!</strong> {{ systemInfo|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemSuccess != null %}
+                <div class=\"row\">
+                    <div class=\"alert alert-success col-md-12 alert-dismissible\" role=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                        <strong>Success!</strong> {{ systemSuccess|raw }}
+                    </div>
+                </div>
+            {% endif %}
             <div class=\"row\">
                 <div class=\"col-lg-12\">
                     <h1 class=\"page-header\">{% block content_title %}{% endblock %}</h1>

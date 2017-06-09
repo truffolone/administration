@@ -389,6 +389,38 @@
         </nav>
 
         <div id="page-wrapper">
+            {% if systemError != null %}
+                <div class="row">
+                    <div class="alert alert-danger col-md-12 alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Stop!</strong> {{ systemError|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemWarning != null %}
+                <div class="row">
+                    <div class="alert alert-warning col-md-12 alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> {{ systemWarning|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemInfo != null %}
+                <div class="row">
+                    <div class="alert alert-info col-md-12 alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Info!</strong> {{ systemInfo|raw }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if systemSuccess != null %}
+                <div class="row">
+                    <div class="alert alert-success col-md-12 alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> {{ systemSuccess|raw }}
+                    </div>
+                </div>
+            {% endif %}
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">{% block content_title %}{% endblock %}</h1>
