@@ -8,11 +8,21 @@ class Login extends CI_Controller {
     }
 
     public function index() {
-        echo "hello";
-    }
+        #basic library load
+        $this->load->library("form_validation");
+        $this->load->helper("form");
 
-    public function index2() {
-        echo "hello2";
+        #login data
+        $loginData = array(
+                'email'     => '',
+                'password'  => ''
+        );
+
+        if($this->form_validation->run() === true) {
+
+        } else {
+            $this->twig->display('login');
+        }
     }
 
 }
