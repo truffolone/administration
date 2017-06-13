@@ -80,6 +80,35 @@ Class User {
     }
 
     /*
+     * Logging user in
+     */
+    public function login($email, $password) : bool {
+        #loading data
+        $genericUserInfo = $this->ci->db->select("id, password")->where("email", $email)->get("users");
+        
+        if($genericUserInfo->num_rows() === 1) {
+            $user = $genericUserInfo->row();
+            
+            #checking password
+            if(password_verify($this->hashPassword($password), $user->password)) {
+                #setting up the user
+                $this->loadById($user->id);
+
+                #saving session
+                $userdata = array(
+                        'id'    => $this->id
+                );
+                $this->ci->session->set_userdata($userdata);
+
+                #returning success
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /*
      * Set User Groups if a user has been defined
      */
     public function setGroups() : ?obj {
