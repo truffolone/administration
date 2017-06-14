@@ -20,8 +20,25 @@ class Users extends CI_Controller {
         $orderby = $this->input->get("orderby") ? $this->input->get("orderby")  : "id";
         $order   = $this->input->get("order")   ? $this->input->get("order")    : "DESC";
 
+        #limitations (group(s), active, etc...)
+        $limitations = array();
+
         #getting user list with custom function
-        $ulist = $this->users_model->getFullUsersList($page, $perpage, $orderby, $order);
+        $ulist = $this->users_model->getFullUsersList($page, $perpage, $orderby, $order, $limitations);
+        $usersCount = $this->users_model->countUsers($limitations);
+
+        #setting up display data
+        $response = array(
+                'users'         => $ulist->num_rows() > 0 ? $ulist->result() : null,
+                'usersCount'    => $usersCount,
+                'page'          => $page,
+                'perpage'       => $perpage,
+                'orderby'       => $orderby,
+                'order'         => $order
+        );
+
+        #rendering page
+        $this->twig->display("users/index", $response);
     }
 
     /*

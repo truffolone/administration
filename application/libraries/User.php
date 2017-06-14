@@ -73,7 +73,7 @@ Class User {
     /*
      * hash user password and setup salt and hashed password
      */
-    public function hashPassword(string $password) {
+    public function hashPassword($password) {
         $p = password_hash($password, PASSWORD_BCRYPT);
 
         return $p;
@@ -85,12 +85,11 @@ Class User {
     public function login($email, $password) : bool {
         #loading data
         $genericUserInfo = $this->ci->db->select("id, password")->where("email", $email)->get("users");
-        
-        if($genericUserInfo->num_rows() === 1) {
+        if($genericUserInfo->num_rows() > 0) {
             $user = $genericUserInfo->row();
-            
+
             #checking password
-            if(password_verify($this->hashPassword($password), $user->password)) {
+            if(password_verify($password, $user->password)) {
                 #setting up the user
                 $this->loadById($user->id);
 
@@ -98,8 +97,9 @@ Class User {
                 $userdata = array(
                         'id'    => $this->id
                 );
-                $this->ci->session->set_userdata($userdata);
 
+                $this->ci->session->set_userdata($userdata);
+                
                 #returning success
                 return true;
             }
@@ -111,7 +111,7 @@ Class User {
     /*
      * Set User Groups if a user has been defined
      */
-    public function setGroups() : ?obj {
+    public function setGroups() {
         if($this->id == null) {
             return false;
         }
@@ -120,7 +120,7 @@ Class User {
 
         if(count($rawGroups) > 0) {
             foreach($rawGroups as $key => $value) {
-                $this->$groups[] = $value;
+                $this->groups[] = $value;
             }
         }
 
@@ -171,7 +171,7 @@ Class User {
      * applies $user properties to $this->_$property of User class
      * it overwrites if not in safe mode
      */
-    private function _apply(obj $user, bool $safe = FALSE) : self {
+    private function _apply(stdClass $user, bool $safe = FALSE) : self {
         foreach($user as $key => $val) {
             if($safe && property_exists($this, $key) && $this->$key != null) continue;
             $this->$key = $val;

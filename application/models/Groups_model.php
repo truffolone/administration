@@ -10,7 +10,7 @@ class Groups_model extends CI_Model {
      * Load user groups from a single user
      */
     public function loadFromUserId(int $id) : ?array {
-        $res = $this->db->select("*")
+        $res = $this->db->select("groups.id, groups.name")
                         ->from("groups")
                         ->join("users_groups", "users_groups.group_id = groups.id")
                         ->where("users_groups.user_id", $id)

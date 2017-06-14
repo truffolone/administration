@@ -27,7 +27,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     ";
         // line 5
         $this->displayBlock('head', $context, $blocks);
-        // line 54
+        // line 63
         echo "</head>
 
 <body>
@@ -275,85 +275,37 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                             <a href=\"index.html\"><i class=\"fa fa-dashboard fa-fw\"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Charts<span class=\"fa arrow\"></span></a>
+                            <a href=\"#\"><i class=\"fa fa-user fa-fw\"></i> Utenti<span class=\"fa arrow\"></span></a>
                             <ul class=\"nav nav-second-level\">
                                 <li>
-                                    <a href=\"flot.html\">Flot Charts</a>
+                                    <a href=\"";
+        // line 313
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "users/index\">Lista Utenti</a>
                                 </li>
                                 <li>
-                                    <a href=\"morris.html\">Morris.js Charts</a>
+                                    <a href=\"";
+        // line 316
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "users/add\">Aggiungi un Utente</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href=\"tables.html\"><i class=\"fa fa-table fa-fw\"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href=\"forms.html\"><i class=\"fa fa-edit fa-fw\"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> UI Elements<span class=\"fa arrow\"></span></a>
+                            <a href=\"#\"><i class=\"fa fa-users fa-fw\"></i> Gruppi Utente<span class=\"fa arrow\"></span></a>
                             <ul class=\"nav nav-second-level\">
                                 <li>
-                                    <a href=\"panels-wells.html\">Panels and Wells</a>
+                                    <a href=\"";
+        // line 325
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "groups/index\">Lista Gruppi Utente</a>
                                 </li>
                                 <li>
-                                    <a href=\"buttons.html\">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href=\"notifications.html\">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href=\"typography.html\">Typography</a>
-                                </li>
-                                <li>
-                                    <a href=\"icons.html\"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href=\"grid.html\">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-sitemap fa-fw\"></i> Multi-Level Dropdown<span class=\"fa arrow\"></span></a>
-                            <ul class=\"nav nav-second-level\">
-                                <li>
-                                    <a href=\"#\">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href=\"#\">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href=\"#\">Third Level <span class=\"fa arrow\"></span></a>
-                                    <ul class=\"nav nav-third-level\">
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-files-o fa-fw\"></i> Sample Pages<span class=\"fa arrow\"></span></a>
-                            <ul class=\"nav nav-second-level\">
-                                <li>
-                                    <a href=\"blank.html\">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href=\"login.html\">Login Page</a>
+                                    <a href=\"";
+        // line 328
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "groups/add\">Aggiungi un Gruppo Utente</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -367,70 +319,70 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
         <div id=\"page-wrapper\">
             ";
-        // line 392
+        // line 341
         if ((($context["systemError"] ?? null) != null)) {
-            // line 393
+            // line 342
             echo "                <div class=\"row\">
                     <div class=\"alert alert-danger col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Stop!</strong> ";
-            // line 396
+            // line 345
             echo ($context["systemError"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 400
+        // line 349
         echo "            ";
         if ((($context["systemWarning"] ?? null) != null)) {
-            // line 401
+            // line 350
             echo "                <div class=\"row\">
                     <div class=\"alert alert-warning col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Warning!</strong> ";
-            // line 404
+            // line 353
             echo ($context["systemWarning"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 408
+        // line 357
         echo "            ";
         if ((($context["systemInfo"] ?? null) != null)) {
-            // line 409
+            // line 358
             echo "                <div class=\"row\">
                     <div class=\"alert alert-info col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Info!</strong> ";
-            // line 412
+            // line 361
             echo ($context["systemInfo"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 416
+        // line 365
         echo "            ";
         if ((($context["systemSuccess"] ?? null) != null)) {
-            // line 417
+            // line 366
             echo "                <div class=\"row\">
                     <div class=\"alert alert-success col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Success!</strong> ";
-            // line 420
+            // line 369
             echo ($context["systemSuccess"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 424
+        // line 373
         echo "            <div class=\"row\">
                 <div class=\"col-lg-12\">
                     <h1 class=\"page-header\">";
-        // line 426
+        // line 375
         $this->displayBlock('content_title', $context, $blocks);
         echo "</h1>
                 </div>
@@ -439,9 +391,9 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
             <!-- /.row -->
             <div class=\"row\">
                 ";
-        // line 432
+        // line 381
         $this->displayBlock('content', $context, $blocks);
-        // line 433
+        // line 382
         echo "            </div>
             <!-- /.row -->
         </div>
@@ -449,45 +401,6 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src=\"";
-        // line 442
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/jquery/jquery.min.js\"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src=\"";
-        // line 445
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/bootstrap/bootstrap.min.js\"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src=\"";
-        // line 448
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/metisMenu/metisMenu.min.js\"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src=\"";
-        // line 451
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/raphael/raphael.min.js\"></script>
-    <script src=\"";
-        // line 452
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/morrisjs/morris.min.js\"></script>
-    <script src=\"";
-        // line 453
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/data/morris-data.js\"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src=\"";
-        // line 456
-        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/js/custom.js\"></script>
-
 </body>
 
 </html>
@@ -590,17 +503,35 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
         echo "public/css/style.css\" rel=\"stylesheet\">
 
-        <!-- Morris Charts CSS -->
+        <!-- Custom Fonts -->
         <link href=\"";
         // line 42
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/css/morrisjs/morris.css\" rel=\"stylesheet\">
+        echo "public/css/font-awesome/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">
 
-        <!-- Custom Fonts -->
-        <link href=\"";
+        <!-- jQuery -->
+        <script src=\"";
         // line 45
         echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
-        echo "public/css/font-awesome/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">
+        echo "public/js/jquery/jquery.min.js\"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src=\"";
+        // line 48
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/js/bootstrap/bootstrap.min.js\"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src=\"";
+        // line 51
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/js/metisMenu/metisMenu.min.js\"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src=\"";
+        // line 54
+        echo twig_escape_filter($this->env, ($context["base_url"] ?? null), "html", null, true);
+        echo "public/js/custom.js\"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -616,12 +547,12 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     {
     }
 
-    // line 426
+    // line 375
     public function block_content_title($context, array $blocks = array())
     {
     }
 
-    // line 432
+    // line 381
     public function block_content($context, array $blocks = array())
     {
     }
@@ -638,7 +569,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     public function getDebugInfo()
     {
-        return array (  625 => 432,  620 => 426,  615 => 30,  602 => 45,  596 => 42,  590 => 39,  584 => 36,  578 => 33,  572 => 30,  566 => 27,  561 => 25,  557 => 24,  553 => 23,  549 => 22,  545 => 21,  541 => 20,  537 => 19,  533 => 18,  529 => 17,  525 => 16,  521 => 15,  517 => 14,  513 => 13,  509 => 12,  501 => 6,  498 => 5,  488 => 456,  482 => 453,  478 => 452,  474 => 451,  468 => 448,  462 => 445,  456 => 442,  445 => 433,  443 => 432,  434 => 426,  430 => 424,  423 => 420,  418 => 417,  415 => 416,  408 => 412,  403 => 409,  400 => 408,  393 => 404,  388 => 401,  385 => 400,  378 => 396,  373 => 393,  371 => 392,  31 => 54,  29 => 5,  23 => 1,);
+        return array (  556 => 381,  551 => 375,  546 => 30,  533 => 54,  527 => 51,  521 => 48,  515 => 45,  509 => 42,  503 => 39,  497 => 36,  491 => 33,  485 => 30,  479 => 27,  474 => 25,  470 => 24,  466 => 23,  462 => 22,  458 => 21,  454 => 20,  450 => 19,  446 => 18,  442 => 17,  438 => 16,  434 => 15,  430 => 14,  426 => 13,  422 => 12,  414 => 6,  411 => 5,  397 => 382,  395 => 381,  386 => 375,  382 => 373,  375 => 369,  370 => 366,  367 => 365,  360 => 361,  355 => 358,  352 => 357,  345 => 353,  340 => 350,  337 => 349,  330 => 345,  325 => 342,  323 => 341,  307 => 328,  301 => 325,  289 => 316,  283 => 313,  31 => 63,  29 => 5,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -691,11 +622,20 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
         <!-- Custom CSS -->
         <link href=\"{{ base_url }}public/css/style.css\" rel=\"stylesheet\">
 
-        <!-- Morris Charts CSS -->
-        <link href=\"{{ base_url }}public/css/morrisjs/morris.css\" rel=\"stylesheet\">
-
         <!-- Custom Fonts -->
         <link href=\"{{ base_url }}public/css/font-awesome/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">
+
+        <!-- jQuery -->
+        <script src=\"{{ base_url }}public/js/jquery/jquery.min.js\"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src=\"{{ base_url }}public/js/bootstrap/bootstrap.min.js\"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src=\"{{ base_url }}public/js/metisMenu/metisMenu.min.js\"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src=\"{{ base_url }}public/js/custom.js\"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -951,85 +891,25 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                             <a href=\"index.html\"><i class=\"fa fa-dashboard fa-fw\"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Charts<span class=\"fa arrow\"></span></a>
+                            <a href=\"#\"><i class=\"fa fa-user fa-fw\"></i> Utenti<span class=\"fa arrow\"></span></a>
                             <ul class=\"nav nav-second-level\">
                                 <li>
-                                    <a href=\"flot.html\">Flot Charts</a>
+                                    <a href=\"{{ base_url() }}users/index\">Lista Utenti</a>
                                 </li>
                                 <li>
-                                    <a href=\"morris.html\">Morris.js Charts</a>
+                                    <a href=\"{{ base_url() }}users/add\">Aggiungi un Utente</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href=\"tables.html\"><i class=\"fa fa-table fa-fw\"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href=\"forms.html\"><i class=\"fa fa-edit fa-fw\"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> UI Elements<span class=\"fa arrow\"></span></a>
+                            <a href=\"#\"><i class=\"fa fa-users fa-fw\"></i> Gruppi Utente<span class=\"fa arrow\"></span></a>
                             <ul class=\"nav nav-second-level\">
                                 <li>
-                                    <a href=\"panels-wells.html\">Panels and Wells</a>
+                                    <a href=\"{{ base_url() }}groups/index\">Lista Gruppi Utente</a>
                                 </li>
                                 <li>
-                                    <a href=\"buttons.html\">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href=\"notifications.html\">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href=\"typography.html\">Typography</a>
-                                </li>
-                                <li>
-                                    <a href=\"icons.html\"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href=\"grid.html\">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-sitemap fa-fw\"></i> Multi-Level Dropdown<span class=\"fa arrow\"></span></a>
-                            <ul class=\"nav nav-second-level\">
-                                <li>
-                                    <a href=\"#\">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href=\"#\">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href=\"#\">Third Level <span class=\"fa arrow\"></span></a>
-                                    <ul class=\"nav nav-third-level\">
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href=\"#\"><i class=\"fa fa-files-o fa-fw\"></i> Sample Pages<span class=\"fa arrow\"></span></a>
-                            <ul class=\"nav nav-second-level\">
-                                <li>
-                                    <a href=\"blank.html\">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href=\"login.html\">Login Page</a>
+                                    <a href=\"{{ base_url() }}groups/add\">Aggiungi un Gruppo Utente</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -1090,24 +970,6 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src=\"{{ base_url }}public/js/jquery/jquery.min.js\"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src=\"{{ base_url }}public/js/bootstrap/bootstrap.min.js\"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src=\"{{ base_url }}public/js/metisMenu/metisMenu.min.js\"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src=\"{{ base_url }}public/js/raphael/raphael.min.js\"></script>
-    <script src=\"{{ base_url }}public/js/morrisjs/morris.min.js\"></script>
-    <script src=\"{{ base_url }}public/js/data/morris-data.js\"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src=\"{{ base_url }}public/js/custom.js\"></script>
-
 </body>
 
 </html>

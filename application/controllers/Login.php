@@ -17,7 +17,7 @@ class Login extends CI_Controller {
                 'email'     => '',
                 'password'  => ''
         );
-
+        
         $this->form_validation->set_rules("email", "Email", "required");
         $this->form_validation->set_rules("password", "Password", "required");
 

@@ -83,7 +83,7 @@ class Users_model extends CI_Model {
     /*
      * load all users with a custom function
      */
-    public function getFullUsersList(int $page, int $perpage, string $orderby, string $order) {
+    public function getFullUsersList(int $page, int $perpage, string $orderby, string $order, array $limitations) {
         #limiting orderby
         $orderByLimit = array("u.id", "u.username");
 
@@ -95,14 +95,33 @@ class Users_model extends CI_Model {
         $offset  = ($page - 1) * $perpage;
 
         #query builder
-        $query = "SELECT u.id, u.username
+        $query = "SELECT u.*
                   FROM users u
                   ORDER BY " . $orderby . " " . $order . "
-                  LIMIT " . $limit . ", " . $offset;
+                  LIMIT " . $offset . ", " . $limit;
 
         #executing query
         $result = $this->db->query($query);
 
         return $result;
+    }
+
+    /*
+     * Count users number based on limitations passed
+     */
+    public function countUsers(array $limitations) : int {
+        $totusers = 0;
+
+        #creating query
+        $query = "SELECT COUNT(*) as total FROM users";
+
+        #getting results back
+        if($result = $this->db->query($query)) {
+            $totusers = $result->row()->total;
+        } else {
+            log_message("error", "can't find user's count based on " . print_r($limitations, TRUE));
+        }
+
+        return $totusers;
     }
 }

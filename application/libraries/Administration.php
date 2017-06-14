@@ -30,8 +30,8 @@ class Administration {
         #checking group
         if(!$this->_free()) {
             if($this->ci->user->id != null) {
-                foreach($this->allowedGroups as $ag) {
-                    if(in_array($ag, $this->ci->user->groups)) {
+                foreach($this->ci->user->groups as $ag) {
+                    if(in_array($ag['id'], $this->allowedGroups)) {
                         return true;
                     }
                 }
@@ -74,8 +74,8 @@ class Administration {
     private function _getSessionData() : array {
         $return = array();
 
-        if($this->ci->session->user_id) {
-            $return['user_id'] = $this->ci->session->user_id;
+        if($this->ci->session->id) {
+            $return['user_id'] = $this->ci->session->id;
         }
 
         return $return;
