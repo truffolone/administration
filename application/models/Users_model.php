@@ -95,7 +95,8 @@ class Users_model extends CI_Model {
         $offset  = ($page - 1) * $perpage;
 
         #query builder
-        $query = "SELECT u.*
+        $query = "SELECT u.*,
+                    (SELECT COUNT(*) FROM users_groups g WHERE user_id = u.id) as totGroups
                   FROM users u
                   ORDER BY " . $orderby . " " . $order . "
                   LIMIT " . $offset . ", " . $limit;

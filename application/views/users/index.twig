@@ -34,6 +34,7 @@
                                 <th>#</th>
                                 <th>Email</th>
                                 <th>Username</th>
+                                <th>Groups</th>
                                 <th>Created</th>
                                 <th>Last Edit</th>
                                 <th>Active</th>
@@ -46,16 +47,17 @@
                                     <td>{{ user.id }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.username }}</td>
-                                    <td>{{ user.created }}</td>
-                                    <td>{{ user.last_update }}</td>
-                                    <td>
+                                    <td class="text-center">{{ user.totGroups }}</td>
+                                    <td class="text-right">{{ user.created }}</td>
+                                    <td class="text-right">{{ user.last_update }}</td>
+                                    <td class="text-center">
                                         {% if user.active == 1 %}
                                             Sì
                                         {% else %}
                                             No
                                         {% endif %}
                                     </td>
-                                    <td>{{ user.id }}</td>
+                                    <td class="text-right">{{ user.id }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
