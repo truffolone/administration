@@ -1,0 +1,72 @@
+{% extends "layouts/default.twig" %}
+
+{% block head %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.bs.min.css">
+    
+    <script type="text/javascript" charset="utf8" src="{{ base_url() }}public/js/datatables/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#groupsTable').DataTable();
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
+{% endblock %}
+
+{% block title %}Gestione Gruppi{% endblock %}
+
+{% block content_title %}Lista Gruppi{% endblock %}
+
+{% block content %}
+    {% if groupsCount > 0 %}
+        <div class="col-lg-12">
+            <div class="text-right">
+                <a href="{{ site_url("groups/add") }}" class="btn btn-primary btn-lg"><i class="fa fa-lg fa-plus-square"></i> Aggiungi un Gruppo</a>
+            </div>
+            <hr class="clearfix">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Lista dei Gruppi
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="groupsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Utenti</th>
+                                <th>Applicazioni</th>
+                                <th>Creato</th>
+                                <th>Last Edit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for group in groups %}
+                                <tr>
+                                    <td>{{ group.id }}</td>
+                                    <td>{{ group.name }}</td>
+                                    <td>{{ group.totUsers }}</td>
+                                    <td class="text-center">3</td>
+                                    <td class="text-right">{{ group.created }}</td>
+                                    <td class="text-right">{{ group.last_update }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ site_url("groups/edit/") }}{{ group.id }}">
+                                            <i class="fa fa-pencil-square-o fa-lg" data-toggle="tooltip" title="Edit {{ group.name }}"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center"><b>Nessun Gruppo Trovato</b></div>
+    {% endif %}
+{% endblock %}

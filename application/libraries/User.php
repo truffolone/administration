@@ -1,4 +1,5 @@
 <?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class User {
 
@@ -168,7 +169,7 @@ Class User {
     }
 
     /*
-     * applies $user properties to $this->_$property of User class
+     * applies $user properties to $this->$property of User class
      * it overwrites if not in safe mode
      */
     private function _apply(stdClass $user, bool $safe = FALSE) : self {
