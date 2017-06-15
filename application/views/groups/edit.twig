@@ -1,0 +1,25 @@
+{% extends "layouts/default.twig" %}
+
+{% block title %}Modifica Gruppo "{{ group.name }}"{% endblock %}
+
+{% block content_title %}Modifica Gruppo #{{ group.id }}: {{ group.name }} {% endblock %}
+
+{% block content %}
+    <div class="col-md-6">
+        {{ form_open() }}
+            <div class="col-lg-12">
+                <h2 class="page-header"></h2>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">Nome Gruppo <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <input type="name" name="name" class="form-control" id="name" value="{{ group.name }}" placeholder="Nome Gruppo" required>
+            </div>
+            <div class="form-group col-md-12">
+                <input class="btn btn-default btn-info pull-right" type="submit" value="Salva le Modifiche" id="submit">
+            </div>
+        {{ form_close() }}
+    </div>
+    <div class="col-md-6"></div>
+{% endblock %}

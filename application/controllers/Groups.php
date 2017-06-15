@@ -97,5 +97,68 @@ class Groups extends CI_Controller {
         $this->load->model("groups_model");
         $this->load->library("form_validation");
         $this->load->helper("form");
+
+        #defining default values from database
+        $response = array();
+
+        #loading Group
+        $group = $this->_loadGroup($id);
+
+        #loading all Users
+        $users = $this->groups_model->loadAllUsers();
+
+        $response['group'] = $group;
+        $response['users'] = $users;
+        $response['ug']    = $this->groups_model->ug($id);
+
+        die(var_dump($response));
+
+        if($this->group->id != null) {
+            $this->form_validation->set_rules("name", "Name", "required");
+
+            if($this->form_validation->run() === true) {
+                #setting up new data
+                $this->group->name = $this->input->post("name");
+
+                #saving the group
+                $this->group->save();
+
+                #reinitializing the group values
+                $repsonse['group'] = $this->_loadGroup($id);
+            } else {
+                #handling validation errors
+                if(validation_errors() != "") {
+                    $this->twig->addGlobal("systemError", validation_errors());
+                }
+
+                #setting new values
+                if($this->input->post("name") && $this->input->post("name") != "") {
+                    $response['group']['name'] = $this->input->post("name");
+                }
+            }
+
+            $this->twig->display("groups/edit", $response);
+        } else {
+            #non-existent group id
+            show_404();
+            exit;
+        }
+    }
+
+    /*
+     * Function to instantiate a group into group library
+     */
+    private function _loadGroup(int $id) {
+        $this->load->library("group");
+        $this->group->loadFromId($id);
+
+        $group = array();
+        $group = array(
+                'id'        => $this->group->id,
+                'name'      => $this->group->name,
+                'users'     => $this->group->users
+        );
+
+        return $group;
     }
 }

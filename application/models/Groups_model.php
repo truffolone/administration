@@ -38,12 +38,37 @@ class Groups_model extends CI_Model {
     }
 
     /*
+     * Load users based on group id
+     */
+    public function loadUsers(int $id) {
+        $res = $this->db->select("u.id, u.email, u.username, u.active")
+                        ->from("users u")
+                        ->join("users_groups ug", "(ug.user_id = u.id AND ug.group_id = " . $id . ")")
+                        ->get();
+
+        if($res) {
+            return $res->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    /*
      * Load all user groups available
      */
     public function loadAll(): CI_DB_pdo_result {
         $res = $this->db->order_by("name")->get("groups");
 
         return $res;
+    }
+
+    /*
+     * Load all users
+     */
+    public function loadAllUsers() {
+        $res = $this->db->select("id, username, email, active")->get("users");
+
+        return $res->result_array();
     }
 
     /*
@@ -97,5 +122,22 @@ class Groups_model extends CI_Model {
      */
     public function addGroup(array $data) : bool {
         return $this->db->insert("groups", $data);
+    }
+
+    /*
+     * don't ask, I'm lazy
+     */
+    public function ug(int $id) {
+        $ret = array();
+
+        $res = $this->db->select("user_id")->where("group_id", $id)->get("users_groups");
+
+        if($res->num_rows() > 0) {
+            foreach($res->result() as $r) {
+                $ret[] = (int) $r->user_id;
+            }
+        }
+
+        return $ret;
     }
 }

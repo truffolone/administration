@@ -3,8 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Group {
 
+    private $ci;
+
     public $id = null;
     public $name = null;
+    public $created = null;
+    public $last_update = null;
+    public $users = array();
 
     public function __construct() {
         $this->ci =& get_instance();
@@ -28,7 +33,11 @@ class Group {
         }
 
         #loading users assigned to this group
-
+        if($users = $this->ci->groups_model->loadUsers($this->id)) {
+            $this->users = $users;
+        } else {
+            log_message("error", "trying to get users from group " . $this->id . "but the query encountered an error: " . $this->ci->db->last_query());
+        }
     }
 
     /*
@@ -38,7 +47,7 @@ class Group {
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            log_message("error", "trying to set " . $property . " property out of Group object which doesn't exist");
+            log_message("error", "trying to get " . $property . " property out of Group object which doesn't exist");
             return false;
         }
     }
@@ -47,7 +56,7 @@ class Group {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {
-            log_message("error", "trying to get " . $property . " property out of Group object which doesn't exist");
+            log_message("error", "trying to set " . $property . " property out of Group object which doesn't exist");
             return null;
         }
     }
