@@ -111,8 +111,6 @@ class Groups extends CI_Controller {
         $response['users'] = $users;
         $response['ug']    = $this->groups_model->ug($id);
 
-        die(var_dump($response));
-
         if($this->group->id != null) {
             $this->form_validation->set_rules("name", "Name", "required");
 
@@ -134,6 +132,9 @@ class Groups extends CI_Controller {
                 #setting new values
                 if($this->input->post("name") && $this->input->post("name") != "") {
                     $response['group']['name'] = $this->input->post("name");
+                }
+                if($this->input->post("ug")) {
+                    $response['ug'] = $this->input->post("ug");
                 }
             }
 
