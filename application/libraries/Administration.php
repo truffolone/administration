@@ -10,7 +10,8 @@ class Administration {
 
         //ACL
         if(!$this->ACL()) {
-            die("no access allowed");
+            redirect("login", "refresh");
+            exit;
         }
 
         //twig
@@ -48,10 +49,10 @@ class Administration {
      */
     private function _twigFix() {
         $this->ci->twig->addGlobal("base_url", base_url());
-        $this->ci->twig->addGlobal("systemAlert", null);
-        $this->ci->twig->addGlobal("systemWarning", null);
-        $this->ci->twig->addGlobal("systemInfo", null);
-        $this->ci->twig->addGlobal("systemSuccess", null);
+        $this->ci->twig->addGlobal("systemAlert", $this->ci->session->systemAlert ?? null);
+        $this->ci->twig->addGlobal("systemWarning", $this->ci->session->systemWarning ?? null);
+        $this->ci->twig->addGlobal("systemInfo", $this->ci->session->systemInf ?? null);
+        $this->ci->twig->addGlobal("systemSuccess", $this->ci->session->systemSuccess ?? null);
     }
 
     /*

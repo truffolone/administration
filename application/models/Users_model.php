@@ -125,4 +125,60 @@ class Users_model extends CI_Model {
 
         return $totusers;
     }
+
+    /*
+     * Saving the remember me data
+     */
+    public function rememberMe(string $sess_id, int $user_id, string $key) {
+        $return = false;
+
+        #do we have old session id saved for the user?
+        $res = $this->db->select("id, session_id")
+                        ->where("user_id", $user_id)
+                        ->get("session_memory");
+
+        if($res->num_rows() > 0) {
+            #regenerate the session memory
+            $oldId      = $res->row()->id;
+            $oldSessId  = $res->row()->session_id;
+
+            $this->db->where("id", $oldId)->update("session_memory", [
+                                                        "session_id"  => $sess_id,
+                                                        "rh_key"      => $key,
+                                                        "last_update" => date('Y-m-d H:i:s')
+                                                    ]);
+
+            $return = $oldId;
+        } else {
+            #create a new memory
+            $this->db->insert("session_memory", [
+                    "session_id"    => $sess_id,
+                    "user_id"       => $user_id,
+                    "rh_key"        => $key,
+                    "last_update"   => date('Y-m-d H:i:s')
+            ]);
+
+            $return = $this->db->insert_id();
+        }
+
+        return $return;
+    }
+
+    /*
+     * Delete remember me data from db
+     */
+    public function cleanUpRememberMe(int $upUntil, bool $rememberMe = true, int $user_id = 0) {
+        #delete older than
+        $goback = time() - $upUntil;
+
+        #delete old data
+        $this->db->where("last_update <", $goback)
+                 ->delete("session_memory");
+
+        #delete self if not wanted
+        if(!$rememberMe) {
+            $this->db->where("user_id", $user_id)
+                     ->delete("session_memory");
+        }
+    }
 }

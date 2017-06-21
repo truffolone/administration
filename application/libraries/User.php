@@ -83,7 +83,7 @@ Class User {
     /*
      * Logging user in
      */
-    public function login($email, $password) : bool {
+    public function login(string $email, string $password, bool $rememberMe = false) : bool {
         #loading data
         $genericUserInfo = $this->ci->db->select("id, password")->where("email", $email)->get("users");
         if($genericUserInfo->num_rows() > 0) {
@@ -101,6 +101,9 @@ Class User {
 
                 $this->ci->session->set_userdata($userdata);
                 
+                #remember me
+                $this->_rememberUser($rememberMe);
+
                 #returning success
                 return true;
             }
@@ -141,6 +144,46 @@ Class User {
         } 
 
         return true;
+    }
+
+    /*
+     * Remember the user saving the session id for rehydration
+     */
+    private function _rememberUser(bool $rememberMe) : void {
+        #check if everything is alright
+        if(!$this->ci->session->session_id) {
+            log_message("error", "User " . $this->id . " misses session_id!");
+            return;
+        }
+
+        if($rememberMe) {
+            #random key!
+            $rand = $this->_encRememberMe();
+
+            #saving the remember_session in the database
+            $cid = $this->ci->users_model->rememberMe($this->ci->session->session_id, $this->id, $rand);
+
+            #saving cookie
+            setcookie("saved_session_id", $cid);
+            setcookie("rh", $rand);
+        }
+        
+        #cleaningUp Data
+        $oldest = $this->ci->config->item("remember_me_expiration");
+        $this->ci->users_model->cleanUpRememberMe($rememberMe, $oldest);
+    }
+
+    /*
+     * user remember me Encrypt Key
+     */
+    private function _encRememberMe() : string {
+        $this->ci->load->library("encryption");
+        $this->ci->encryption->initialize([
+                'cipher' => $this->ci->config->item('remember_me_cipher'),
+                'mode' => $this->ci->config->item('remember_me_mode')
+        ]);
+
+        return $this->ci->encryption->encrypt($this->id . mt_rand());
     }
 
     /*

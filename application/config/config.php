@@ -326,6 +326,10 @@ $config['cache_query_string'] = FALSE;
 */
 $config['encryption_key'] = 'fqWG6y2ZPdOaYxg2OzeQ8opNNHTiRJ8Z';
 
+#added for user remember me encryption
+$config['remember_me_cipher'] = 'aes-256';
+$config['remember_me_mode'] = 'ctr';
+
 /*
 |--------------------------------------------------------------------------
 | Session Variables
@@ -377,13 +381,16 @@ $config['encryption_key'] = 'fqWG6y2ZPdOaYxg2OzeQ8opNNHTiRJ8Z';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'tfl_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = '/var/www/html/echosystem/administration/sessions';
-$config['sess_match_ip'] = FALSE;
+$config['sess_save_path'] = 'echo_sessions';
+$config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
+
+#added for remember me login
+$config['remember_me_expiration'] = 15 * 24 * 60 * 60; #days * hours * minutes * seconds
 
 /*
 |--------------------------------------------------------------------------
@@ -400,7 +407,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
+$config['cookie_prefix']	= 'echo';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
