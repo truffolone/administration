@@ -75,8 +75,14 @@ class Administration {
     private function _getSessionData() : array {
         $return = array();
 
+        #trying to return session data from the PHP SESSION
         if($this->ci->session->id) {
             $return['user_id'] = $this->ci->session->id;
+        } else {
+            #checking if the user have some older session to revive
+            if($revivedId = $this->ci->user->reviveUserSession()) {
+                $return['user_id'] = $revivedId;
+            }
         }
 
         return $return;

@@ -91,15 +91,8 @@ Class User {
 
             #checking password
             if(password_verify($password, $user->password)) {
-                #setting up the user
-                $this->loadById($user->id);
-
-                #saving session
-                $userdata = array(
-                        'id'    => $this->id
-                );
-
-                $this->ci->session->set_userdata($userdata);
+                #memorise the user
+                $this->_generateSession($user->id);
                 
                 #remember me
                 $this->_rememberUser($rememberMe);
@@ -147,6 +140,44 @@ Class User {
     }
 
     /*
+     * Shortcut for logged in user
+     */
+    public function isLoggedIn() : bool {
+        return !! $this->id;
+    }
+
+    /*
+     * User Logout
+     */
+    public function logout() {
+        #removing id from userdata
+        $this->ci->session->unset_userdata('id');
+    }
+
+    /*
+     *
+     */
+    public function reviveUserSession() {
+        #checking if we have the cookies
+        if(array_key_exists("saved_session_id", $_COOKIE) && array_key_exists("rh", $_COOKIE)) {
+            #checking if session is still valid
+            $id = $this->ci->users_model->reloadUserId($_COOKIE['saved_session_id'], $_COOKIE['rh'], $this->ci->config->item('remember_me_expiration'));
+            if($id) {
+                #generating user session
+                $this->_generateSession($id);
+
+                #saving the remember me
+                $this->_rememberUser(true);
+
+                #returning user id
+                return $id;
+            }
+        }
+
+        return false;
+    }
+
+    /*
      * Remember the user saving the session id for rehydration
      */
     private function _rememberUser(bool $rememberMe) : void {
@@ -164,13 +195,29 @@ Class User {
             $cid = $this->ci->users_model->rememberMe($this->ci->session->session_id, $this->id, $rand);
 
             #saving cookie
-            setcookie("saved_session_id", $cid);
-            setcookie("rh", $rand);
+            $expire = time()+$this->ci->config->item('remember_me_expiration');
+            setcookie("saved_session_id", $cid, $expire);
+            setcookie("rh", $rand, $expire);
         }
         
         #cleaningUp Data
         $oldest = $this->ci->config->item("remember_me_expiration");
         $this->ci->users_model->cleanUpRememberMe($rememberMe, $oldest);
+    }
+
+    /*
+     * Generate session for the user based on user id
+     */
+    private function _generateSession($id) {
+        #setting up the user
+        $this->loadById($id);
+
+        #saving session
+        $userdata = array(
+                'id'    => $this->id
+        );
+
+        $this->ci->session->set_userdata($userdata);
     }
 
     /*

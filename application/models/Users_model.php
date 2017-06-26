@@ -181,4 +181,21 @@ class Users_model extends CI_Model {
                      ->delete("session_memory");
         }
     }
+
+    /*
+     * Reload userId if the cookie is valid. double check on expiration date (I don't trust cookies)
+     */
+    public function reloadUserId($sessId, $rh, $expire) {
+        $result = $this->db->select("user_id")
+                           ->where("id", $sessId)
+                           ->where("rh_key", $rh)
+                           ->where("last_update >", time()-$expire)
+                           ->get("session_memory");
+        
+        if($result->num_rows() > 0) {
+            return $result->row()->user_id;
+        }
+
+        return false;
+    }
 }
