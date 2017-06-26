@@ -41,6 +41,22 @@ class Group {
     }
 
     /*
+     * Saves the group
+     */
+    public function save() {
+        #does the group already esists?
+        if(!is_null($this->id)) {
+            #edit group
+            $this->ci->groups_model->editGroup($this->id, ['name' => $this->name, 'last_update' => time()]);
+        } else {
+            #new group
+            $this->id = $this->ci->groups_model->addGroup(['name' => $this->name]);
+        }
+
+        return $this->id;
+    }
+
+    /*
      * Setters and getters
      */
      public function __get($property) {

@@ -122,7 +122,7 @@ class Groups extends CI_Controller {
                 $this->group->save();
 
                 #reinitializing the group values
-                $repsonse['group'] = $this->_loadGroup($id);
+                $response['group'] = $this->_loadGroup($id);
             } else {
                 #handling validation errors
                 if(validation_errors() != "") {
