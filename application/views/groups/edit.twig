@@ -14,8 +14,18 @@
                 <label for="name">Nome Gruppo <span class="text-danger">*</span>:</label>
             </div>
             <div class="form-group col-md-9">
-                <input type="name" name="name" class="form-control" id="name" value="{{ group.name }}" placeholder="Nome Gruppo" required>
+                <input type="text" name="name" class="form-control" id="name" value="{{ group.name }}" placeholder="Nome Gruppo" required>
             </div>
+            <!--<div class="form-group col-md-3">
+                <label for="ug">Utenti nel Gruppo <span class="text-danger"></span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <select multiple="multiple" id="ug" name="ug[]">
+                    {% for user in users %}
+                        <option value="{{ user.id }}"{% if user.id in ug %} selected="selected"{% endif %}>{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>-->
             <div class="form-group col-md-12">
                 <input class="btn btn-default btn-info pull-right" type="submit" value="Salva le Modifiche" id="submit">
             </div>

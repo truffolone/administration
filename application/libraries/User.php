@@ -117,7 +117,9 @@ Class User {
 
         if(count($rawGroups) > 0) {
             foreach($rawGroups as $key => $value) {
-                $this->groups[] = $value;
+                if(!array_key_exists($value['id'], $this->groups)) {
+                    $this->groups[$value['id']] = $value;
+                }
             }
         }
 

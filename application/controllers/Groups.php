@@ -95,7 +95,7 @@ class Groups extends CI_Controller {
       */
     public function edit(int $id) {
         #loading libraries
-        $this->load->library("group"); #editing a group needs some standardized help
+        $this->load->library("group"); #editing a group needs some standardised help
         $this->load->model("groups_model");
         $this->load->library("form_validation");
         $this->load->helper("form");
