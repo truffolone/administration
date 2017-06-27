@@ -61,14 +61,16 @@ class Groups extends CI_Controller {
          #running the form
          if($this->form_validation->run() === TRUE) {
             #saving user data
-            $insert['name']   = $this->input->post("name");
+            $this->load->library("group");
+            $this->group->name = $this->input->post("name");
 
             #saving the user
-            if(!$this->groups_model->addGroup($insert)) {
+            if(!$this->group->save()) {
                 $this->twig->addGlobal("systemError", "something went wrong... Administrators has been contacted...");
                 log_message("error", "couldn't add a group... " . $this->db->last_query());
                 redirect("groups/add", "refresh");
             } else {
+                $this->session->set_flashdata("systemSuccess", "Group <b>" . $this->group->name . "</b> added successfully, you can now setup everything else");
                 redirect("groups/edit/" . $this->db->insert_id());
             }
          } else {
@@ -123,6 +125,8 @@ class Groups extends CI_Controller {
 
                 #reinitializing the group values
                 $response['group'] = $this->_loadGroup($id);
+
+                $this->twig->addGlobal("systemSuccess", "Group <b>" . $this->group->name . "</b> edited successfully");
             } else {
                 #handling validation errors
                 if(validation_errors() != "") {

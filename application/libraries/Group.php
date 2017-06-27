@@ -47,7 +47,8 @@ class Group {
         #does the group already esists?
         if(!is_null($this->id)) {
             #edit group
-            $this->ci->groups_model->editGroup($this->id, ['name' => $this->name, 'last_update' => time()]);
+            $this->ci->groups_model->editGroup($this->id, ['name' => $this->name, 
+                                                           'last_update' => date('Y-m-d H:i:s')]);
         } else {
             #new group
             $this->id = $this->ci->groups_model->addGroup(['name' => $this->name]);

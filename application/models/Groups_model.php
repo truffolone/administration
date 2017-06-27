@@ -120,16 +120,18 @@ class Groups_model extends CI_Model {
     /*
      * Adds a group
      */
-    public function addGroup(array $data) : bool {
-        $this->db->insert("groups", $data);
+    public function addGroup(array $data) : ?int {
+        if($this->db->insert("groups", $data)) {
+            return $this->db->insert_id();
+        }
 
-        return $this->insert_id();
+        return null;
     }
 
     /*
      * Edits a Group
      */
-    public function editGroup(int $id, array $data) : bool {
+    public function editGroup(int $id, array $data) : int {
         $this->db->where("id", $id)->update("groups", $data);
 
         return $id;
