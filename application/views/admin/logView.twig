@@ -1,0 +1,69 @@
+{% extends "layouts/default.twig" %}
+
+{% block head %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}public/css/datatables/datatables.bs.min.css">
+    
+    <script type="text/javascript" charset="utf8" src="{{ base_url() }}public/js/datatables/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#logTable').DataTable({
+                "order": [1, 'desc'],
+                "paging": false
+            });
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
+
+    <style>
+        .levelError {
+            color: #99031c;
+        }
+        .levelDebug {
+            color: #afa400;
+        }
+        .levelInfo {
+            color: #082cce;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Logs Echosystem Administration{% endblock %}
+
+{% block content_title %}Guarda Log: {{ logname }}{% endblock %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Log Display
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="logTable">
+                        <thead>
+                            <tr>
+                                <th>Livello</th>
+                                <th>Time</th>
+                                <th>Errore</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for line in log %}
+                                <tr class="level{{ line.level|capitalize }}">
+                                    <td>{{ line.level }}</td>
+                                    <td>{{ line.time }}</td>
+                                    <td>{{ line.text }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -13,6 +13,7 @@ Class User {
     private $groups = array();
     private $ug = array();
     private $force_logout = false;
+    private $last_update = null;
 
     private $ci;
 
@@ -292,7 +293,7 @@ Class User {
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            log_message("error", "trying to set " . $property . " property out of User object which doesn't exist");
+            log_message("error", "trying to get " . $property . " property out of User object which doesn't exist");
             return false;
         }
     }
@@ -307,7 +308,7 @@ Class User {
                 $this->$property = $value;
             }
         } else {
-            log_message("error", "trying to get " . $property . " property out of User object which doesn't exist");
+            log_message("error", "trying to set " . $property . " property out of User object which doesn't exist");
             return null;
         }
     }
