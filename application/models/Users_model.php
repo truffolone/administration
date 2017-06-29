@@ -43,13 +43,13 @@ class Users_model extends CI_Model {
      */
     public function update_user(int $id, string $username, string $email, string $password, bool $active) {
         $result = $this->db->where("id", $id)
-                           ->update("users", array(
+                           ->update("users", [
                                         'username'      => $username,
                                         'email'         => $email,
                                         'password'      => $password,
                                         'last_update'   => date('Y-m-d H:i:s'),
                                         'active'        => $active
-                                    ));
+                           ]);
         if($result === false) {
             return false;
         } else {
@@ -197,5 +197,19 @@ class Users_model extends CI_Model {
         }
 
         return false;
+    }
+
+    /*
+     * handles the force_logout for the user
+     */
+    public function forceLogout(int $id, bool $status) : void {
+        $this->db->where("id", $id)->update("users", ['force_logout' => $status]);
+    }
+
+    /*
+     * Deletes user rememberMe saved session
+     */
+    public function destroyMemory(int $user_id) {
+        $this->db->where("user_id", $user_id)->delete("session_memory");
     }
 }

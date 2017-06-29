@@ -23,16 +23,16 @@
                 <input type="text" name="username" class="form-control" id="username" value="{{ formValues.username }}" placeholder="Username" required>
             </div>
             <div class="form-group col-md-3">
-                <label for="password">Password <span class="text-danger">*</span>:</label>
+                <label for="password">Password:</label>
             </div> 
             <div class="form-group col-md-9">
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="form-group col-md-3">
-                <label for="password_confirm">Conferma Password <span class="text-danger">*</span>:</label>
+                <label for="password_confirm">Conferma Password:</label>
             </div> 
             <div class="form-group col-md-9">
-                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm">
             </div>
             <div class="col-lg-12">
                 <h2 class="page-header">Gruppi Utente</h2>
@@ -43,7 +43,7 @@
             <div class="form-group col-md-9">
                 <select multiple="multiple" name="groups[]" id="groups" class="form-control">
                     {% for group in groups %}
-                        <option value="{{ group.id }}"{% if group.id in formValues.groups %} selected="selected"{% endif %}>{{ group.name }}</option>
+                        <option value="{{ group.id }}"{% if group.id in formValues.ug %} selected="selected"{% endif %}>{{ group.name }}</option>
                     {% endfor %}
                 </select>
             </div>

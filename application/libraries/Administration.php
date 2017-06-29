@@ -10,8 +10,14 @@ class Administration {
 
         //ACL
         if(!$this->ACL()) {
-            redirect("login", "refresh");
-            exit;
+            if($this->ci->user->isLoggedIn()) {
+                #no permissions
+                show_error("You can't access this area", "403", $heading = 'Not Allowed');
+            } else {
+                #login please
+                redirect("login", "refresh");
+                exit;
+            }
         }
 
         //twig

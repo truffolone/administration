@@ -11,6 +11,8 @@ Class User {
     private $last_edit = null;
     private $active = true;
     private $groups = array();
+    private $ug = array();
+    private $force_logout = false;
 
     private $ci;
 
@@ -27,6 +29,11 @@ Class User {
      */
     public function loadById(int $id, bool $safe = FALSE) : ?self {
         if($user = $this->ci->users_model->loadById($id)) {
+            #checking if we need to force logout
+            if($user->force_logout) {
+                $this->forceLogout();
+                exit;
+            }
             $this->_apply($user, $safe);
             $this->setGroups();
         } else {
@@ -97,12 +104,48 @@ Class User {
                 #remember me
                 $this->_rememberUser($rememberMe);
 
+                #removing force logout
+                if($this->force_logout) {
+                    $this->force_logout = false;
+                    $this->ci->users_model->forceLogout($this->id, $this->force_logout);
+                }
+
                 #returning success
                 return true;
             }
         }
 
         return false;
+    }
+
+    /*
+     * Logging user Out
+     */
+    public function logout($id = false) : void {
+        if(!$id) {
+            $id = $this->id;
+        }
+
+        if($id != null) {
+            #trying to destroy the session if we *are* the user logging out
+            if($this->id == $id) {
+                $this->session->sess_destroy();
+            } else {
+                #if we can't logout in such a simple way, we force logout the next time the user enters the website
+                $this->ci->users_model->forceLogout($id, true);
+            }
+            #removing any possibility to retrieve the session
+            $this->ci->users_model->destroyMemory($id);
+        } else {
+            log_message("error", "User logout attempted but on void id!");
+        }
+    }
+
+    /*
+     * Forces logout (simple for now, will be based on websites and not core)
+     */
+    public function forceLogout() {
+        $this->logout();
     }
 
     /*
@@ -142,6 +185,20 @@ Class User {
     }
 
     /*
+     * define user-groups association
+     */
+    public function associateUG() : array {
+        #redefine ug...
+        if(count($this->groups) > 0) {
+            foreach($this->groups as $k => $v) {
+                $this->ug[] = $v['id'];
+            }
+        }
+
+        return $this->ug;
+    }
+
+    /*
      * Shortcut for logged in user
      */
     public function isLoggedIn() : bool {
@@ -157,7 +214,7 @@ Class User {
     }
 
     /*
-     *
+     * Revive user session based on cookie stored
      */
     public function reviveUserSession() {
         #checking if we have the cookies
@@ -250,7 +307,9 @@ Class User {
     public function __set($property, $value) {
         if (property_exists($this, $property)) {
             if($property == "password") {
-                $this->$property = $this->hashPassword($value);
+                if($this->passwordStrengthCheck($value)) { #if we are editing a user without changing the password...
+                    $this->$property = $this->hashPassword($value);
+                }
             } else {
                 $this->$property = $value;
             }
