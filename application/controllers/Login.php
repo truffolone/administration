@@ -49,4 +49,10 @@ class Login extends CI_Controller {
         }
     }
 
+    public function logout() {
+        $this->user->logout();
+        $this->session->set_flashdata("systemSuccess", "Logged Out Successfully");
+        redirect("login", "refresh");
+    }
+
 }

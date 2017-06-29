@@ -280,7 +280,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ site_url("logout") }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -326,6 +326,27 @@
                                 </li>
                                 <li>
                                     <a href="{{ base_url() }}groups/add">Aggiungi un Gruppo Utente</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-plug fa-fw"></i> Servizi<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ base_url() }}services/index">Lista Servizi</a>
+                                </li>
+                                <li>
+                                    <a href="{{ base_url() }}services/add">Aggiungi un Servizio</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bolt fa-fw"></i> Amministrazione<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ base_url() }}admin/logs">Logs</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

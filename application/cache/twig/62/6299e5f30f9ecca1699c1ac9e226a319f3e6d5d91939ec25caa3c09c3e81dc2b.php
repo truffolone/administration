@@ -248,7 +248,10 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                         <li><a href=\"#\"><i class=\"fa fa-gear fa-fw\"></i> Settings</a>
                         </li>
                         <li class=\"divider\"></li>
-                        <li><a href=\"login.html\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>
+                        <li><a href=\"";
+        // line 283
+        echo twig_escape_filter($this->env, site_url("logout"), "html", null, true);
+        echo "\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -310,6 +313,36 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href=\"#\"><i class=\"fa fa-plug fa-fw\"></i> Servizi<span class=\"fa arrow\"></span></a>
+                            <ul class=\"nav nav-second-level\">
+                                <li>
+                                    <a href=\"";
+        // line 337
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "services/index\">Lista Servizi</a>
+                                </li>
+                                <li>
+                                    <a href=\"";
+        // line 340
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "services/add\">Aggiungi un Servizio</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href=\"#\"><i class=\"fa fa-bolt fa-fw\"></i> Amministrazione<span class=\"fa arrow\"></span></a>
+                            <ul class=\"nav nav-second-level\">
+                                <li>
+                                    <a href=\"";
+        // line 349
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "admin/logs\">Logs</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -319,70 +352,70 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
         <div id=\"page-wrapper\">
             ";
-        // line 341
+        // line 362
         if ((($context["systemError"] ?? null) != null)) {
-            // line 342
+            // line 363
             echo "                <div class=\"row\">
                     <div class=\"alert alert-danger col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Stop!</strong> ";
-            // line 345
+            // line 366
             echo ($context["systemError"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 349
+        // line 370
         echo "            ";
         if ((($context["systemWarning"] ?? null) != null)) {
-            // line 350
+            // line 371
             echo "                <div class=\"row\">
                     <div class=\"alert alert-warning col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Warning!</strong> ";
-            // line 353
+            // line 374
             echo ($context["systemWarning"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 357
+        // line 378
         echo "            ";
         if ((($context["systemInfo"] ?? null) != null)) {
-            // line 358
+            // line 379
             echo "                <div class=\"row\">
                     <div class=\"alert alert-info col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Info!</strong> ";
-            // line 361
+            // line 382
             echo ($context["systemInfo"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 365
+        // line 386
         echo "            ";
         if ((($context["systemSuccess"] ?? null) != null)) {
-            // line 366
+            // line 387
             echo "                <div class=\"row\">
                     <div class=\"alert alert-success col-md-12 alert-dismissible\" role=\"alert\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
                         <strong>Success!</strong> ";
-            // line 369
+            // line 390
             echo ($context["systemSuccess"] ?? null);
             echo "
                     </div>
                 </div>
             ";
         }
-        // line 373
+        // line 394
         echo "            <div class=\"row\">
                 <div class=\"col-lg-12\">
                     <h1 class=\"page-header\">";
-        // line 375
+        // line 396
         $this->displayBlock('content_title', $context, $blocks);
         echo "</h1>
                 </div>
@@ -391,9 +424,9 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
             <!-- /.row -->
             <div class=\"row\">
                 ";
-        // line 381
+        // line 402
         $this->displayBlock('content', $context, $blocks);
-        // line 382
+        // line 403
         echo "            </div>
             <!-- /.row -->
         </div>
@@ -547,12 +580,12 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
     {
     }
 
-    // line 375
+    // line 396
     public function block_content_title($context, array $blocks = array())
     {
     }
 
-    // line 381
+    // line 402
     public function block_content($context, array $blocks = array())
     {
     }
@@ -569,7 +602,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
 
     public function getDebugInfo()
     {
-        return array (  556 => 381,  551 => 375,  546 => 30,  533 => 54,  527 => 51,  521 => 48,  515 => 45,  509 => 42,  503 => 39,  497 => 36,  491 => 33,  485 => 30,  479 => 27,  474 => 25,  470 => 24,  466 => 23,  462 => 22,  458 => 21,  454 => 20,  450 => 19,  446 => 18,  442 => 17,  438 => 16,  434 => 15,  430 => 14,  426 => 13,  422 => 12,  414 => 6,  411 => 5,  397 => 382,  395 => 381,  386 => 375,  382 => 373,  375 => 369,  370 => 366,  367 => 365,  360 => 361,  355 => 358,  352 => 357,  345 => 353,  340 => 350,  337 => 349,  330 => 345,  325 => 342,  323 => 341,  307 => 328,  301 => 325,  289 => 316,  283 => 313,  31 => 63,  29 => 5,  23 => 1,);
+        return array (  589 => 402,  584 => 396,  579 => 30,  566 => 54,  560 => 51,  554 => 48,  548 => 45,  542 => 42,  536 => 39,  530 => 36,  524 => 33,  518 => 30,  512 => 27,  507 => 25,  503 => 24,  499 => 23,  495 => 22,  491 => 21,  487 => 20,  483 => 19,  479 => 18,  475 => 17,  471 => 16,  467 => 15,  463 => 14,  459 => 13,  455 => 12,  447 => 6,  444 => 5,  430 => 403,  428 => 402,  419 => 396,  415 => 394,  408 => 390,  403 => 387,  400 => 386,  393 => 382,  388 => 379,  385 => 378,  378 => 374,  373 => 371,  370 => 370,  363 => 366,  358 => 363,  356 => 362,  340 => 349,  328 => 340,  322 => 337,  310 => 328,  304 => 325,  292 => 316,  286 => 313,  253 => 283,  31 => 63,  29 => 5,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -864,7 +897,7 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                         <li><a href=\"#\"><i class=\"fa fa-gear fa-fw\"></i> Settings</a>
                         </li>
                         <li class=\"divider\"></li>
-                        <li><a href=\"login.html\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>
+                        <li><a href=\"{{ site_url(\"logout\") }}\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -910,6 +943,27 @@ class __TwigTemplate_bbfec15f53b614756a78f1105dce2267455d24256356c7ffd6bfb400881
                                 </li>
                                 <li>
                                     <a href=\"{{ base_url() }}groups/add\">Aggiungi un Gruppo Utente</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href=\"#\"><i class=\"fa fa-plug fa-fw\"></i> Servizi<span class=\"fa arrow\"></span></a>
+                            <ul class=\"nav nav-second-level\">
+                                <li>
+                                    <a href=\"{{ base_url() }}services/index\">Lista Servizi</a>
+                                </li>
+                                <li>
+                                    <a href=\"{{ base_url() }}services/add\">Aggiungi un Servizio</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href=\"#\"><i class=\"fa fa-bolt fa-fw\"></i> Amministrazione<span class=\"fa arrow\"></span></a>
+                            <ul class=\"nav nav-second-level\">
+                                <li>
+                                    <a href=\"{{ base_url() }}admin/logs\">Logs</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

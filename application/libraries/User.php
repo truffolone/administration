@@ -129,7 +129,8 @@ Class User {
         if($id != null) {
             #trying to destroy the session if we *are* the user logging out
             if($this->id == $id) {
-                $this->session->sess_destroy();
+                //$this->session->sess_destroy();
+                $this->ci->session->unset_userdata('id');
             } else {
                 #if we can't logout in such a simple way, we force logout the next time the user enters the website
                 $this->ci->users_model->forceLogout($id, true);
@@ -203,14 +204,6 @@ Class User {
      */
     public function isLoggedIn() : bool {
         return !! $this->id;
-    }
-
-    /*
-     * User Logout
-     */
-    public function logout() {
-        #removing id from userdata
-        $this->ci->session->unset_userdata('id');
     }
 
     /*
