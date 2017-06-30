@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class Service {
 
+    #from services table
+    private $id          = null;
+    private $name        = null;
+    private $pkey        = null;
+    private $skye        = null;
+    private $alg         = null;
+    private $active      = false;
+    private $created     = null;
+    private $last_update = null;
+
     private $ci;
 
     public function __construct() {
