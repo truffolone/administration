@@ -1,0 +1,41 @@
+{% extends "layouts/default.twig" %}
+
+{% block title %}Aggiungi Service{% endblock %}
+
+{% block content_title %}Aggiungi un Service{% endblock %}
+
+{% block content %}
+    <div class="col-md-6">
+        {{ form_open() }}
+            <div class="col-lg-12">
+                <h2 class="page-header"></h2>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">Nome Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <input type="name" name="name" class="form-control" id="name" value="{{ formValues.name }}" placeholder="Nome Service" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="algoritmo">Algoritmo Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <select name="algoritmo" id="algoritmo" required>
+                    {% for alg in algs %}
+                        <option value="{{ alg.code }}"{% if algoritmo == alg.code %} selected="selected"{% endif %}>{{ alg.type }} {{ alg.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="url">URL Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-9">
+                <input type="url" name="url" class="form-control" id="url" value="{{ formValues.url }}" placeholder="URL Service" required>
+            </div>
+            <div class="form-group col-md-12">
+                <input class="btn btn-default btn-info pull-right" type="submit" value="Crea il Service >>" id="submit">
+            </div>
+        {{ form_close() }}
+    </div>
+    <div class="col-md-6"></div>
+{% endblock %}

@@ -432,3 +432,8 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

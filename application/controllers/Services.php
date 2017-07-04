@@ -27,21 +27,50 @@ class Services extends CI_Controller {
         #loading assets
         $this->load->helper("form");
         $this->load->library("form_validation");
-        $this->load->library("service");
+        $this->load->library("service"); #used just for possible algorythms
 
         #base data array
         $return = array(
             'formValues' => array(
                 'name'      => '',
-                'algoritmo' => ''
-            )
+                'algoritmo' => '',
+                'url'       => ''
+            ),
+            'algs'      => $this->service->algs
         );
+
+        $this->form_validation->set_rules("name", "Name", "required|alpha_dash");
+        $this->form_validation->set_rules("algoritmo", "Algoritmo", "required|callback_alg_check");
+        $this->form_validation->set_rules("url", "URL", "required|alpha_dash");
 
         #running the form
         if($this->form_validation->run() === true) {
 
         } else {
+            #checking if there are any errors
+            if(validation_errors() && valudation_errors() != "") {
+                $this->twig->addGlobal("systemWarning", validation_errors());
+            }
 
+            #applying values if there are any
+            $return['formValues']['name']       = $this->input->post("name")      ? $this->input->post("name")      : "";
+            $return['formValues']['algoritmo']  = $this->input->post("algoritmo") ? $this->input->post("algoritmo") : "";
+            $return['formValues']['url']        = $this->input->post("url")       ? $this->input->post("url")       : "";
+
+            #display form
+            $this->twig->display("services/add", $return);
+        }
+    }
+
+    /*
+     * callback for the alg check
+     */
+    public function alg_check($str) {
+        if(array_key_exists($str, $this->service->algs)) {
+            return true;
+        } else {
+            $this->form_validation->set_message("alg_check", "the {field} field is not allowed with <b>" . $str . "</b> value");
+            return false;
         }
     }
 }

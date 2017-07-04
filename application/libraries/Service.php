@@ -15,6 +15,15 @@ Class Service {
 
     private $ci;
 
+    private $algs        = array(
+            'HS256' => ['code' => 'HS256', 'type' => 'hash_hmac', 'name' => 'SHA256'],
+            'HS384' => ['code' => 'HS384', 'type' => 'hash_hmac', 'name' => 'SHA384'],
+            'HS512' => ['code' => 'HS512', 'type' => 'hash_hmac', 'name' => 'SHA512'],
+            'RS256' => ['code' => 'RS256', 'type' => 'openssl', 'name' => 'SHA256'],
+            'RS384' => ['code' => 'RS384', 'type' => 'openssl', 'name' => 'SHA384'],
+            'RS512' => ['code' => 'RS512', 'type' => 'openssl', 'name' => 'SHA512']
+    );
+
     public function __construct() {
         $this->ci =& get_instance();
     }
