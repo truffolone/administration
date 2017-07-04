@@ -45,7 +45,14 @@ class Services extends CI_Controller {
 
         #running the form
         if($this->form_validation->run() === true) {
+            #set values to the library
+            $this->service->name      = $this->input->post("name");
+            $this->service->algoritmo = $this->input->post("algoritmo");
+            $this->service->url       = $this->input->post("url");
 
+            #creating new keys
+            $this->service->generatePKey();
+            $this->service->generateSKey();
         } else {
             #checking if there are any errors
             if(validation_errors() && valudation_errors() != "") {
