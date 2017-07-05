@@ -1,16 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Services extends CI_Controller {
-
-    public function __construct() {
+class Services extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /*
      * Shows list of available Services
      */
-    public function index() {
+    public function index()
+    {
         #loading model (no need for library)
         $this->load->model("services_model");
 
@@ -23,7 +25,8 @@ class Services extends CI_Controller {
     /*
      * simple add for a service for basic data
      */
-    public function add() {
+    public function add()
+    {
         #loading assets
         $this->load->helper("form");
         $this->load->library("form_validation");
@@ -40,13 +43,13 @@ class Services extends CI_Controller {
             'algs'      => $this->service->algs
         );
 
-        $this->form_validation->set_rules("name",        "Name",        "required|alpha_dash");
-        $this->form_validation->set_rules("algoritmo",   "Algoritmo",   "required|callback_alg_check");
-        $this->form_validation->set_rules("url",         "URL",         "required|alpha_dash");
+        $this->form_validation->set_rules("name", "Name", "required|alpha_dash");
+        $this->form_validation->set_rules("algoritmo", "Algoritmo", "required|callback_alg_check");
+        $this->form_validation->set_rules("url", "URL", "required|alpha_dash");
         $this->form_validation->set_rules("descrizione", "Descrizione", "");
 
         #running the form
-        if($this->form_validation->run() === true) {
+        if ($this->form_validation->run() === true) {
             #set values to the library
             $this->service->name        = $this->input->post("name");
             $this->service->algoritmo   = $this->input->post("algoritmo");
@@ -58,7 +61,7 @@ class Services extends CI_Controller {
             $this->service->generateSKey();
         } else {
             #checking if there are any errors
-            if(validation_errors() && valudation_errors() != "") {
+            if (validation_errors() && valudation_errors() != "") {
                 $this->twig->addGlobal("systemWarning", validation_errors());
             }
 
@@ -76,8 +79,9 @@ class Services extends CI_Controller {
     /*
      * callback for the alg check
      */
-    public function alg_check($str) {
-        if(array_key_exists($str, $this->service->algs)) {
+    public function alg_check($str)
+    {
+        if (array_key_exists($str, $this->service->algs)) {
             return true;
         } else {
             $this->form_validation->set_message("alg_check", "the {field} field is not allowed with <b>" . $str . "</b> value");

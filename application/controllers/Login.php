@@ -1,15 +1,17 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller {
-
-    public function __construct() {
+class Login extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         #checking if the user is logged in and redirecting to the home page
-        if($this->user->isLoggedIn()) {
+        if ($this->user->isLoggedIn()) {
             redirect("/", "refresh");
             exit;
         }
@@ -28,8 +30,8 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules("email", "Email", "required");
         $this->form_validation->set_rules("password", "Password", "required");
 
-        if($this->form_validation->run() === true) {
-            if($this->user->login($this->input->post("email"), $this->input->post("password"), $this->input->post("remember"))) {
+        if ($this->form_validation->run() === true) {
+            if ($this->user->login($this->input->post("email"), $this->input->post("password"), $this->input->post("remember"))) {
                 redirect("login", "refresh");
             } else {
                 #handling validation errors
@@ -40,7 +42,7 @@ class Login extends CI_Controller {
             }
         } else {
             #handling validation errors
-            if(validation_errors() != "") {
+            if (validation_errors() != "") {
                 $this->twig->addGlobal("systemWarning", validation_errors());
             }
 
@@ -49,10 +51,10 @@ class Login extends CI_Controller {
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->user->logout();
         $this->session->set_flashdata("systemSuccess", "Logged Out Successfully");
         redirect("login", "refresh");
     }
-
 }

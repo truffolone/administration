@@ -1,19 +1,20 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Users_model extends CI_Model {
-
-    public function __construct() {
-
+class Users_model extends CI_Model
+{
+    public function __construct()
+    {
     }
 
-    /* 
+    /*
      * functions for single user setup and querying
      */
-    public function loadById(int $id) {
+    public function loadById(int $id)
+    {
         $res = $this->db->where("id", $id)->get("users");
         
-        if($res->num_rows() > 0) {
+        if ($res->num_rows() > 0) {
             return $res->row();
         }
 
@@ -23,7 +24,8 @@ class Users_model extends CI_Model {
     /*
      * User Registration, returns user id on success, false on fail
      */
-    public function register_user(string $username, string $email, string $password, bool $active) {
+    public function register_user(string $username, string $email, string $password, bool $active)
+    {
         $result = $this->db->insert('users', array(
                                         'username'      => $username,
                                         'email'         => $email,
@@ -32,7 +34,7 @@ class Users_model extends CI_Model {
                                         'last_update'   => date('Y-m-d H:i:s'),
                                         'active'        => $active
                                     ));
-        if($result === false) {
+        if ($result === false) {
             return false;
         } else {
             return $this->db->insert_id();
@@ -42,7 +44,8 @@ class Users_model extends CI_Model {
     /*
      * User Edit, returns user id on success, false on fail, based on id passed
      */
-    public function update_user(int $id, string $username, string $email, string $password, bool $active) {
+    public function update_user(int $id, string $username, string $email, string $password, bool $active)
+    {
         $result = $this->db->where("id", $id)
                            ->update("users", [
                                         'username'      => $username,
@@ -51,7 +54,7 @@ class Users_model extends CI_Model {
                                         'last_update'   => date('Y-m-d H:i:s'),
                                         'active'        => $active
                            ]);
-        if($result === false) {
+        if ($result === false) {
             return false;
         } else {
             return $id;
@@ -61,14 +64,15 @@ class Users_model extends CI_Model {
     /*
      * Update user groups
      */
-    public function updateGroups(int $user_id, array $groups) : bool {
+    public function updateGroups(int $user_id, array $groups) : bool
+    {
         #removing user groups
         $this->db->where("user_id", $user_id)->delete("users_groups");
 
         #now lets save the groups (if any)
-        if(count($groups) > 0) {
+        if (count($groups) > 0) {
             $batch = array();
-            foreach($groups as $k => $v) {
+            foreach ($groups as $k => $v) {
                 $batch[] = array(
                     'user_id'  => $user_id,
                     'group_id' => $v
@@ -84,7 +88,8 @@ class Users_model extends CI_Model {
     /*
      * load all users with a custom function
      */
-    public function getFullUsersList(int $page, int $perpage, string $orderby, string $order, array $limitations) {
+    public function getFullUsersList(int $page, int $perpage, string $orderby, string $order, array $limitations)
+    {
         #limiting orderby
         $orderByLimit = array("u.id", "u.username");
 
@@ -111,17 +116,18 @@ class Users_model extends CI_Model {
     /*
      * Count users number based on limitations passed
      */
-    public function countUsers(array $limitations) : int {
+    public function countUsers(array $limitations) : int
+    {
         $totusers = 0;
 
         #creating query
         $query = "SELECT COUNT(*) as total FROM users";
 
         #getting results back
-        if($result = $this->db->query($query)) {
+        if ($result = $this->db->query($query)) {
             $totusers = $result->row()->total;
         } else {
-            log_message("error", "can't find user's count based on " . print_r($limitations, TRUE));
+            log_message("error", "can't find user's count based on " . print_r($limitations, true));
         }
 
         return $totusers;
@@ -130,7 +136,8 @@ class Users_model extends CI_Model {
     /*
      * Saving the remember me data
      */
-    public function rememberMe(string $sess_id, int $user_id, string $key) {
+    public function rememberMe(string $sess_id, int $user_id, string $key)
+    {
         $return = false;
 
         #do we have old session id saved for the user?
@@ -138,7 +145,7 @@ class Users_model extends CI_Model {
                         ->where("user_id", $user_id)
                         ->get("session_memory");
 
-        if($res->num_rows() > 0) {
+        if ($res->num_rows() > 0) {
             #regenerate the session memory
             $oldId      = $res->row()->id;
             $oldSessId  = $res->row()->session_id;
@@ -168,7 +175,8 @@ class Users_model extends CI_Model {
     /*
      * Delete remember me data from db
      */
-    public function cleanUpRememberMe(int $upUntil, bool $rememberMe = true, int $user_id = 0) {
+    public function cleanUpRememberMe(int $upUntil, bool $rememberMe = true, int $user_id = 0)
+    {
         #delete older than
         $goback = time() - $upUntil;
 
@@ -177,7 +185,7 @@ class Users_model extends CI_Model {
                  ->delete("session_memory");
 
         #delete self if not wanted
-        if(!$rememberMe) {
+        if (!$rememberMe) {
             $this->db->where("user_id", $user_id)
                      ->delete("session_memory");
         }
@@ -186,14 +194,15 @@ class Users_model extends CI_Model {
     /*
      * Reload userId if the cookie is valid. double check on expiration date (I don't trust cookies)
      */
-    public function reloadUserId($sessId, $rh, $expire) {
+    public function reloadUserId($sessId, $rh, $expire)
+    {
         $result = $this->db->select("user_id")
                            ->where("id", $sessId)
                            ->where("rh_key", $rh)
                            ->where("last_update >", time()-$expire)
                            ->get("session_memory");
         
-        if($result->num_rows() > 0) {
+        if ($result->num_rows() > 0) {
             return $result->row()->user_id;
         }
 
@@ -203,14 +212,16 @@ class Users_model extends CI_Model {
     /*
      * handles the force_logout for the user
      */
-    public function forceLogout(int $id, bool $status) : void {
+    public function forceLogout(int $id, bool $status) : void
+    {
         $this->db->where("id", $id)->update("users", ['force_logout' => $status]);
     }
 
     /*
      * Deletes user rememberMe saved session
      */
-    public function destroyMemory(int $user_id) {
+    public function destroyMemory(int $user_id)
+    {
         $this->db->where("user_id", $user_id)->delete("session_memory");
     }
 }

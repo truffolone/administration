@@ -135,7 +135,7 @@ class __TwigTemplate_adcdb8f0aaa11cec0e1c912e8978e42eef654bb6659ebe8a482a5b7cf6c
 
     public function getDebugInfo()
     {
-        return array (  119 => 53,  112 => 48,  97 => 46,  93 => 45,  68 => 23,  59 => 17,  48 => 9,  45 => 8,  42 => 7,  36 => 5,  30 => 3,  11 => 1,);
+        return array(  119 => 53,  112 => 48,  97 => 46,  93 => 45,  68 => 23,  59 => 17,  48 => 9,  45 => 8,  42 => 7,  36 => 5,  30 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

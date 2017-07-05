@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-Class Service {
+class Service
+{
 
     #from services table
     private $id          = null;
@@ -26,24 +27,26 @@ Class Service {
             'RS512' => ['code' => 'RS512', 'type' => 'openssl',   'name' => 'SHA512']
     );
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->ci =& get_instance();
     }
 
     /*
      * Saves service based on data
      */
-    public function save() {
+    public function save()
+    {
         #loading model
         $this->ci->load->model("services_model");
 
-        if($this->id === null) {
+        if ($this->id === null) {
             #some date
             $this->created     = time();
             $this->last_update = time();
 
             #insert
-            if($this->id = $this->ci->services_model->newBase($this->name, $this->pkey, $this->skey,
+            if ($this->id = $this->ci->services_model->newBase($this->name, $this->pkey, $this->skey,
                                                               $this->alg, $this->url, $this->created,
                                                               $this->last_update)) {
                 $this->ci->services_model->addInfos($this->id, $this->descrizione);
@@ -56,30 +59,34 @@ Class Service {
     /*
      * Generates a Public Key and save it to the pkey var
      */
-    public function generatePKey() : void {
+    public function generatePKey() : void
+    {
         $this->pkey = openssl_random_pseudo_bytes(128);
     }
 
     /*
      * Generates a Secret Key and save it to the skey var
      */
-    public function generateSKey() : void {
+    public function generateSKey() : void
+    {
         $this->skey = openssl_random_pseudo_bytes(128);
     }
 
     /*
      * Setters and getters
      */
-     public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        } else {
-            log_message("error", "trying to get " . $property . " property out of Service object which doesn't exist");
-            return false;
-        }
-    }
+     public function __get($property)
+     {
+         if (property_exists($this, $property)) {
+             return $this->$property;
+         } else {
+             log_message("error", "trying to get " . $property . " property out of Service object which doesn't exist");
+             return false;
+         }
+     }
 
-    public function __set($property, $value) {
+    public function __set($property, $value)
+    {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {

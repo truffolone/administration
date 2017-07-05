@@ -1,16 +1,18 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Groups extends CI_Controller {
-
-    public function __construct() {
+class Groups extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /*
      * Show groups list
      */
-    public function index() {
+    public function index()
+    {
         #loading base  model
         $this->load->model("groups_model");
 
@@ -44,7 +46,8 @@ class Groups extends CI_Controller {
     /*
      * Add User
      */
-     public function add() {
+     public function add()
+     {
          #loading libraries
          $this->load->model("groups_model");
          $this->load->library("form_validation");
@@ -59,13 +62,13 @@ class Groups extends CI_Controller {
          $this->form_validation->set_rules("name", "Name", "required");
 
          #running the form
-         if($this->form_validation->run() === TRUE) {
-            #saving user data
+         if ($this->form_validation->run() === true) {
+             #saving user data
             $this->load->library("group");
-            $this->group->name = $this->input->post("name");
+             $this->group->name = $this->input->post("name");
 
             #saving the user
-            if(!$this->group->save()) {
+            if (!$this->group->save()) {
                 $this->twig->addGlobal("systemError", "something went wrong... Administrators has been contacted...");
                 log_message("error", "couldn't add a group... " . $this->db->last_query());
                 redirect("groups/add", "refresh");
@@ -74,26 +77,27 @@ class Groups extends CI_Controller {
                 redirect("groups/edit/" . $this->db->insert_id());
             }
          } else {
-            #redefine formValues based on user data (if sent)
+             #redefine formValues based on user data (if sent)
             $formValues['name'] = $this->input->post("name") ? $this->input->post("name") : "";
 
             #handling validation errors
-            if(validation_errors() != "") {
+            if (validation_errors() != "") {
                 $this->twig->addGlobal("systemError", validation_errors());
             }
 
-            $response = array(
+             $response = array(
                 'formValues'        => $formValues
             );
 
-            $this->twig->display("groups/add", $response);
+             $this->twig->display("groups/add", $response);
          }
      }
 
      /*
       * Edit Group
       */
-    public function edit(int $id) {
+    public function edit(int $id)
+    {
         #loading libraries
         $this->load->library("group"); #editing a group needs some standardised help
         $this->load->model("groups_model");
@@ -113,10 +117,10 @@ class Groups extends CI_Controller {
         $response['users'] = $users;
         $response['ug']    = $this->groups_model->ug($id);
 
-        if($this->group->id != null) {
+        if ($this->group->id != null) {
             $this->form_validation->set_rules("name", "Name", "required");
 
-            if($this->form_validation->run() === true) {
+            if ($this->form_validation->run() === true) {
                 #setting up new data
                 $this->group->name = $this->input->post("name");
 
@@ -129,15 +133,15 @@ class Groups extends CI_Controller {
                 $this->twig->addGlobal("systemSuccess", "Group <b>" . $this->group->name . "</b> edited successfully");
             } else {
                 #handling validation errors
-                if(validation_errors() != "") {
+                if (validation_errors() != "") {
                     $this->twig->addGlobal("systemError", validation_errors());
                 }
 
                 #setting new values
-                if($this->input->post("name") && $this->input->post("name") != "") {
+                if ($this->input->post("name") && $this->input->post("name") != "") {
                     $response['group']['name'] = $this->input->post("name");
                 }
-                if($this->input->post("ug")) {
+                if ($this->input->post("ug")) {
                     $response['ug'] = $this->input->post("ug");
                 }
             }
@@ -153,7 +157,8 @@ class Groups extends CI_Controller {
     /*
      * Function to instantiate a group into group library
      */
-    private function _loadGroup(int $id) {
+    private function _loadGroup(int $id)
+    {
         $this->load->library("group");
         $this->group->loadFromId($id);
 

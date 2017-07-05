@@ -1,18 +1,20 @@
 <?php
 
-class Groups_model extends CI_Model {
-
-    public function __construct() {
+class Groups_model extends CI_Model
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /*
      * Load group data from id
      */
-    public function loadFromId(int $id) {
+    public function loadFromId(int $id)
+    {
         $res = $this->db->where("id", $id)->get("groups");
 
-        if($res->num_rows() > 0) {
+        if ($res->num_rows() > 0) {
             return $res->row();
         }
 
@@ -22,14 +24,15 @@ class Groups_model extends CI_Model {
     /*
      * Load user groups from a single user
      */
-    public function loadFromUserId(int $id) : ?array {
+    public function loadFromUserId(int $id) : ?array
+    {
         $res = $this->db->select("groups.id, groups.name")
                         ->from("groups")
                         ->join("users_groups", "users_groups.group_id = groups.id")
                         ->where("users_groups.user_id", $id)
                         ->get();
         
-        if($res->num_rows() > 0) {
+        if ($res->num_rows() > 0) {
             return $res->result_array();
         } else {
             log_message("debug", "looking for groups from user ID " . $id . " but nothing was found");
@@ -40,13 +43,14 @@ class Groups_model extends CI_Model {
     /*
      * Load users based on group id
      */
-    public function loadUsers(int $id) {
+    public function loadUsers(int $id)
+    {
         $res = $this->db->select("u.id, u.email, u.username, u.active")
                         ->from("users u")
                         ->join("users_groups ug", "(ug.user_id = u.id AND ug.group_id = " . $id . ")")
                         ->get();
 
-        if($res) {
+        if ($res) {
             return $res->result_array();
         } else {
             return false;
@@ -56,7 +60,8 @@ class Groups_model extends CI_Model {
     /*
      * Load all user groups available
      */
-    public function loadAll(): CI_DB_pdo_result {
+    public function loadAll(): CI_DB_pdo_result
+    {
         $res = $this->db->order_by("name")->get("groups");
 
         return $res;
@@ -65,7 +70,8 @@ class Groups_model extends CI_Model {
     /*
      * Load all users
      */
-    public function loadAllUsers() {
+    public function loadAllUsers()
+    {
         $res = $this->db->select("id, username, email, active")->get("users");
 
         return $res->result_array();
@@ -74,7 +80,8 @@ class Groups_model extends CI_Model {
     /*
      * load all groups with a custom function
      */
-    public function getFullGroupsList(int $page, int $perpage, string $orderby, string $order, array $limitations) {
+    public function getFullGroupsList(int $page, int $perpage, string $orderby, string $order, array $limitations)
+    {
         #limiting orderby
         $orderByLimit = array("g.id", "g.name");
 
@@ -101,17 +108,18 @@ class Groups_model extends CI_Model {
     /*
      * Count groups number based on limitations passed
      */
-    public function countGroups(array $limitations) : int {
+    public function countGroups(array $limitations) : int
+    {
         $totgroups = 0;
 
         #creating query
         $query = "SELECT COUNT(*) as total FROM groups";
 
         #getting results back
-        if($result = $this->db->query($query)) {
+        if ($result = $this->db->query($query)) {
             $totgroups = $result->row()->total;
         } else {
-            log_message("error", "can't find group's count based on " . print_r($limitations, TRUE));
+            log_message("error", "can't find group's count based on " . print_r($limitations, true));
         }
 
         return $totgroups;
@@ -120,8 +128,9 @@ class Groups_model extends CI_Model {
     /*
      * Adds a group
      */
-    public function addGroup(array $data) : ?int {
-        if($this->db->insert("groups", $data)) {
+    public function addGroup(array $data) : ?int
+    {
+        if ($this->db->insert("groups", $data)) {
             return $this->db->insert_id();
         }
 
@@ -131,7 +140,8 @@ class Groups_model extends CI_Model {
     /*
      * Edits a Group
      */
-    public function editGroup(int $id, array $data) : int {
+    public function editGroup(int $id, array $data) : int
+    {
         $this->db->where("id", $id)->update("groups", $data);
 
         return $id;
@@ -140,9 +150,10 @@ class Groups_model extends CI_Model {
     /*
      * checks if group already exists
      */
-    public function groupExists($gid) : bool {
+    public function groupExists($gid) : bool
+    {
         $res = $this->db->where("id", $gid)->get("groups");
-        if($res->num_rows() > 0) {
+        if ($res->num_rows() > 0) {
             return true;
         } else {
             return false;
@@ -152,13 +163,14 @@ class Groups_model extends CI_Model {
     /*
      * don't ask, I'm lazy
      */
-    public function ug(int $id) {
+    public function ug(int $id)
+    {
         $ret = array();
 
         $res = $this->db->select("user_id")->where("group_id", $id)->get("users_groups");
 
-        if($res->num_rows() > 0) {
-            foreach($res->result() as $r) {
+        if ($res->num_rows() > 0) {
+            foreach ($res->result() as $r) {
                 $ret[] = (int) $r->user_id;
             }
         }

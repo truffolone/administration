@@ -1,8 +1,8 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Group {
-
+class Group
+{
     private $ci;
 
     public $id = null;
@@ -11,7 +11,8 @@ class Group {
     public $last_update = null;
     public $users = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->ci =& get_instance();
         $this->ci->load->model("groups_model");
     }
@@ -20,9 +21,10 @@ class Group {
      * Loading Group data based on id
      * chit chat: I prefer load with multiple queries in order to make the function easily extendible
      */
-    public function loadFromId(int $id) {
+    public function loadFromId(int $id)
+    {
         #loading basic data from the groups table
-        if($basicData = $this->ci->groups_model->loadFromId($id)) {
+        if ($basicData = $this->ci->groups_model->loadFromId($id)) {
             #saving base data
             $this->id           = $id;
             $this->name         = $basicData->name;
@@ -33,7 +35,7 @@ class Group {
         }
 
         #loading users assigned to this group
-        if($users = $this->ci->groups_model->loadUsers($this->id)) {
+        if ($users = $this->ci->groups_model->loadUsers($this->id)) {
             $this->users = $users;
         } else {
             log_message("error", "trying to get users from group " . $this->id . "but the query encountered an error: " . $this->ci->db->last_query());
@@ -43,11 +45,12 @@ class Group {
     /*
      * Saves the group
      */
-    public function save() {
+    public function save()
+    {
         #does the group already esists?
-        if(!is_null($this->id)) {
+        if (!is_null($this->id)) {
             #edit group
-            $this->ci->groups_model->editGroup($this->id, ['name' => $this->name, 
+            $this->ci->groups_model->editGroup($this->id, ['name' => $this->name,
                                                            'last_update' => date('Y-m-d H:i:s')]);
         } else {
             #new group
@@ -60,16 +63,18 @@ class Group {
     /*
      * Setters and getters
      */
-     public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        } else {
-            log_message("error", "trying to get " . $property . " property out of Group object which doesn't exist");
-            return false;
-        }
-    }
+     public function __get($property)
+     {
+         if (property_exists($this, $property)) {
+             return $this->$property;
+         } else {
+             log_message("error", "trying to get " . $property . " property out of Group object which doesn't exist");
+             return false;
+         }
+     }
 
-    public function __set($property, $value) {
+    public function __set($property, $value)
+    {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {

@@ -1,8 +1,8 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-Class User {
-
+class User
+{
     private $id = null;
     private $username = null;
     private $email = null;
@@ -17,7 +17,8 @@ Class User {
 
     private $ci;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->ci =& get_instance();
 
         //loading users model
@@ -25,13 +26,14 @@ Class User {
         $this->ci->load->model("groups_model");
     }
 
-    /* 
+    /*
      * Load a user by ID
      */
-    public function loadById(int $id, bool $safe = FALSE) : ?self {
-        if($user = $this->ci->users_model->loadById($id)) {
+    public function loadById(int $id, bool $safe = false) : ?self
+    {
+        if ($user = $this->ci->users_model->loadById($id)) {
             #checking if we need to force logout
-            if($user->force_logout) {
+            if ($user->force_logout) {
                 $this->forceLogout();
                 exit;
             }
@@ -48,16 +50,17 @@ Class User {
     /*
      * Save new user or edit it based on predefined $this->id;
      */
-    public function save() {
+    public function save()
+    {
         #saving into the user table
-        if($this->id == null) {
+        if ($this->id == null) {
             $this->id = $this->ci->users_model->register_user($this->username, $this->email, $this->password, $this->active);
-            if(!$this->id) {
+            if (!$this->id) {
                 log_message("error", "Trying to register user but something went wrong:\n " . $this->ci->db->last_query());
                 return false;
             }
         } else {
-            if(!$this->ci->users_model->update_user($this->id, $this->username, $this->email, $this->password, $this->active)) {
+            if (!$this->ci->users_model->update_user($this->id, $this->username, $this->email, $this->password, $this->active)) {
                 log_message("error", "Trying to update user (ID: " . $this->id . ") but something went wrong:\n " . $this->ci->db->last_query());
                 return false;
             }
@@ -70,8 +73,9 @@ Class User {
     /*
      * Saving user Groups
      */
-    public function updateGroups() {
-        if($this->id == null) {
+    public function updateGroups()
+    {
+        if ($this->id == null) {
             log_message("error", "Trying to update groups for a missing user");
             return false;
         } else {
@@ -82,7 +86,8 @@ Class User {
     /*
      * hash user password and setup salt and hashed password
      */
-    public function hashPassword($password) {
+    public function hashPassword($password)
+    {
         $p = password_hash($password, PASSWORD_BCRYPT);
 
         return $p;
@@ -91,14 +96,15 @@ Class User {
     /*
      * Logging user in
      */
-    public function login(string $email, string $password, bool $rememberMe = false) : bool {
+    public function login(string $email, string $password, bool $rememberMe = false) : bool
+    {
         #loading data
         $genericUserInfo = $this->ci->db->select("id, password")->where("email", $email)->get("users");
-        if($genericUserInfo->num_rows() > 0) {
+        if ($genericUserInfo->num_rows() > 0) {
             $user = $genericUserInfo->row();
 
             #checking password
-            if(password_verify($password, $user->password)) {
+            if (password_verify($password, $user->password)) {
                 #memorise the user
                 $this->_generateSession($user->id);
                 
@@ -106,7 +112,7 @@ Class User {
                 $this->_rememberUser($rememberMe);
 
                 #removing force logout
-                if($this->force_logout) {
+                if ($this->force_logout) {
                     $this->force_logout = false;
                     $this->ci->users_model->forceLogout($this->id, $this->force_logout);
                 }
@@ -122,14 +128,15 @@ Class User {
     /*
      * Logging user Out
      */
-    public function logout($id = false) : void {
-        if(!$id) {
+    public function logout($id = false) : void
+    {
+        if (!$id) {
             $id = $this->id;
         }
 
-        if($id != null) {
+        if ($id != null) {
             #trying to destroy the session if we *are* the user logging out
-            if($this->id == $id) {
+            if ($this->id == $id) {
                 //$this->session->sess_destroy();
                 $this->ci->session->unset_userdata('id');
             } else {
@@ -146,23 +153,25 @@ Class User {
     /*
      * Forces logout (simple for now, will be based on websites and not core)
      */
-    public function forceLogout() {
+    public function forceLogout()
+    {
         $this->logout();
     }
 
     /*
      * Set User Groups if a user has been defined
      */
-    public function setGroups() {
-        if($this->id == null) {
+    public function setGroups()
+    {
+        if ($this->id == null) {
             return false;
         }
 
         $rawGroups = $this->ci->groups_model->loadFromUserId($this->id);
 
-        if(count($rawGroups) > 0) {
-            foreach($rawGroups as $key => $value) {
-                if(!array_key_exists($value['id'], $this->groups)) {
+        if (count($rawGroups) > 0) {
+            foreach ($rawGroups as $key => $value) {
+                if (!array_key_exists($value['id'], $this->groups)) {
                     $this->groups[$value['id']] = $value;
                 }
             }
@@ -174,14 +183,15 @@ Class User {
     /*
      * Checks user password strength
      */
-    public function passwordStrengthCheck(String $str) : bool {
+    public function passwordStrengthCheck(String $str) : bool
+    {
         if (!preg_match("#[0-9]+#", $str)) {
             return false;
         }
 
         if (!preg_match("#[a-zA-Z]+#", $str)) {
             return false;
-        } 
+        }
 
         return true;
     }
@@ -189,10 +199,11 @@ Class User {
     /*
      * define user-groups association
      */
-    public function associateUG() : array {
+    public function associateUG() : array
+    {
         #redefine ug...
-        if(count($this->groups) > 0) {
-            foreach($this->groups as $k => $v) {
+        if (count($this->groups) > 0) {
+            foreach ($this->groups as $k => $v) {
                 $this->ug[] = $v['id'];
             }
         }
@@ -203,19 +214,21 @@ Class User {
     /*
      * Shortcut for logged in user
      */
-    public function isLoggedIn() : bool {
+    public function isLoggedIn() : bool
+    {
         return !! $this->id;
     }
 
     /*
      * Revive user session based on cookie stored
      */
-    public function reviveUserSession() {
+    public function reviveUserSession()
+    {
         #checking if we have the cookies
-        if(array_key_exists("saved_session_id", $_COOKIE) && array_key_exists("rh", $_COOKIE)) {
+        if (array_key_exists("saved_session_id", $_COOKIE) && array_key_exists("rh", $_COOKIE)) {
             #checking if session is still valid
             $id = $this->ci->users_model->reloadUserId($_COOKIE['saved_session_id'], $_COOKIE['rh'], $this->ci->config->item('remember_me_expiration'));
-            if($id) {
+            if ($id) {
                 #generating user session
                 $this->_generateSession($id);
 
@@ -233,14 +246,15 @@ Class User {
     /*
      * Remember the user saving the session id for rehydration
      */
-    private function _rememberUser(bool $rememberMe) : void {
+    private function _rememberUser(bool $rememberMe) : void
+    {
         #check if everything is alright
-        if(!$this->ci->session->session_id) {
+        if (!$this->ci->session->session_id) {
             log_message("error", "User " . $this->id . " misses session_id!");
             return;
         }
 
-        if($rememberMe) {
+        if ($rememberMe) {
             #random key!
             $rand = $this->_encRememberMe();
 
@@ -261,7 +275,8 @@ Class User {
     /*
      * Generate session for the user based on user id
      */
-    private function _generateSession($id) {
+    private function _generateSession($id)
+    {
         #setting up the user
         $this->loadById($id);
 
@@ -276,7 +291,8 @@ Class User {
     /*
      * user remember me Encrypt Key
      */
-    private function _encRememberMe() : string {
+    private function _encRememberMe() : string
+    {
         $this->ci->load->library("encryption");
         $this->ci->encryption->initialize([
                 'cipher' => $this->ci->config->item('remember_me_cipher'),
@@ -289,19 +305,21 @@ Class User {
     /*
      * Setters and getters
      */
-     public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        } else {
-            log_message("error", "trying to get " . $property . " property out of User object which doesn't exist");
-            return false;
-        }
-    }
+     public function __get($property)
+     {
+         if (property_exists($this, $property)) {
+             return $this->$property;
+         } else {
+             log_message("error", "trying to get " . $property . " property out of User object which doesn't exist");
+             return false;
+         }
+     }
 
-    public function __set($property, $value) {
+    public function __set($property, $value)
+    {
         if (property_exists($this, $property)) {
-            if($property == "password") {
-                if($this->passwordStrengthCheck($value)) { #if we are editing a user without changing the password...
+            if ($property == "password") {
+                if ($this->passwordStrengthCheck($value)) { #if we are editing a user without changing the password...
                     $this->$property = $this->hashPassword($value);
                 }
             } else {
@@ -317,9 +335,12 @@ Class User {
      * applies $user properties to $this->$property of User class
      * it overwrites if not in safe mode
      */
-    private function _apply(stdClass $user, bool $safe = FALSE) : self {
-        foreach($user as $key => $val) {
-            if($safe && property_exists($this, $key) && $this->$key != null) continue;
+    private function _apply(stdClass $user, bool $safe = false) : self
+    {
+        foreach ($user as $key => $val) {
+            if ($safe && property_exists($this, $key) && $this->$key != null) {
+                continue;
+            }
             $this->$key = $val;
         }
 

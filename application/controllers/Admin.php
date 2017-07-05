@@ -1,19 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
-    
-    public function __construct() {
+class Admin extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         $file = file_get_contents("/var/www/html/echosystem/administration/application/logs/log-2017-06-19.php");
         $a = explode("\n", $file);
 
-        foreach($a as $b) {
+        foreach ($a as $b) {
             $t = explode(" ", $b);
-            switch($t[0]) {
+            switch ($t[0]) {
                 case "DEBUG":
                     echo "<p style='color:yellow;'>" . $b . "</p>";
                     break;
@@ -27,20 +29,21 @@ class Admin extends CI_Controller {
     /*
      * Lists all the log files
      */
-    public function logs() {
+    public function logs()
+    {
         #Loading all logs
         $log_path = $this->config->item('log_path') != '' ? $this->config->item('log_path') : APPPATH.'logs/';
         $files = array();
         $dir = opendir($log_path);
-        while(false != ($file = readdir($dir))) {
-            if(($file != ".") && ($file != "..") && ($file != "index.php") && ($file != "index.html")) {
+        while (false != ($file = readdir($dir))) {
+            if (($file != ".") && ($file != "..") && ($file != "index.php") && ($file != "index.html")) {
                 $files[] = array(
                         'name'      => str_replace(".php", "", $file),
                         'time'      => date("d/m/Y H:i:s", filemtime($log_path . $file)),
                         'date'      => date("d F Y", filemtime($log_path . $file)),
                         'size'      => $this->_fileSizeConvert(filesize($log_path . $file))
                 ); // put in array.
-            }   
+            }
         }
 
         $this->twig->display("admin/logs", ['logs' => $files]);
@@ -49,12 +52,13 @@ class Admin extends CI_Controller {
     /*
      * Shows log
      */
-    public function logView(string $log) {
+    public function logView(string $log)
+    {
         $log_path = $this->config->item('log_path') != '' ? $this->config->item('log_path') : APPPATH.'logs/';
         
         #does the log exists?
         $thefile = $log_path . $log . ".php";
-        if(!file_exists($thefile)) {
+        if (!file_exists($thefile)) {
             show_error("Log File not Found: " . $thefile);
             exit;
         }
@@ -65,9 +69,9 @@ class Admin extends CI_Controller {
 
         #parsing the log file
         $fileToShow = array();
-        foreach($a as $b) {
+        foreach ($a as $b) {
             $t = explode(" ", $b);
-            switch($t[0]) {
+            switch ($t[0]) {
                 case "DEBUG":
                     $nolevel = explode("-->", str_replace("DEBUG - ", "", $b));
                     $time = trim($nolevel[0]);
@@ -137,12 +141,10 @@ class Admin extends CI_Controller {
             ),
         );
 
-        foreach($arBytes as $arItem)
-        {
-            if($bytes >= $arItem["VALUE"])
-            {
+        foreach ($arBytes as $arItem) {
+            if ($bytes >= $arItem["VALUE"]) {
                 $result = $bytes / $arItem["VALUE"];
-                $result = str_replace(".", "," , strval(round($result, 2)))." ".$arItem["UNIT"];
+                $result = str_replace(".", ",", strval(round($result, 2)))." ".$arItem["UNIT"];
                 break;
             }
         }
