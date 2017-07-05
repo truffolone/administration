@@ -32,23 +32,26 @@ class Services extends CI_Controller {
         #base data array
         $return = array(
             'formValues' => array(
-                'name'      => '',
-                'algoritmo' => '',
-                'url'       => ''
+                'name'        => '',
+                'algoritmo'   => '',
+                'url'         => '',
+                'descrizione' => ''
             ),
             'algs'      => $this->service->algs
         );
 
-        $this->form_validation->set_rules("name", "Name", "required|alpha_dash");
-        $this->form_validation->set_rules("algoritmo", "Algoritmo", "required|callback_alg_check");
-        $this->form_validation->set_rules("url", "URL", "required|alpha_dash");
+        $this->form_validation->set_rules("name",        "Name",        "required|alpha_dash");
+        $this->form_validation->set_rules("algoritmo",   "Algoritmo",   "required|callback_alg_check");
+        $this->form_validation->set_rules("url",         "URL",         "required|alpha_dash");
+        $this->form_validation->set_rules("descrizione", "Descrizione", "");
 
         #running the form
         if($this->form_validation->run() === true) {
             #set values to the library
-            $this->service->name      = $this->input->post("name");
-            $this->service->algoritmo = $this->input->post("algoritmo");
-            $this->service->url       = $this->input->post("url");
+            $this->service->name        = $this->input->post("name");
+            $this->service->algoritmo   = $this->input->post("algoritmo");
+            $this->service->url         = $this->input->post("url");
+            $this->service->descrizione = $this->input->post("descrizione") ? $this->input->post("descrizione") : "";
 
             #creating new keys
             $this->service->generatePKey();
@@ -60,9 +63,10 @@ class Services extends CI_Controller {
             }
 
             #applying values if there are any
-            $return['formValues']['name']       = $this->input->post("name")      ? $this->input->post("name")      : "";
-            $return['formValues']['algoritmo']  = $this->input->post("algoritmo") ? $this->input->post("algoritmo") : "";
-            $return['formValues']['url']        = $this->input->post("url")       ? $this->input->post("url")       : "";
+            $return['formValues']['name']        = $this->input->post("name")        ? $this->input->post("name")        : "";
+            $return['formValues']['algoritmo']   = $this->input->post("algoritmo")   ? $this->input->post("algoritmo")   : "";
+            $return['formValues']['url']         = $this->input->post("url")         ? $this->input->post("url")         : "";
+            $return['formValues']['descrizione'] = $this->input->post("descrizione") ? $this->input->post("descrizione") : "";
 
             #display form
             $this->twig->display("services/add", $return);

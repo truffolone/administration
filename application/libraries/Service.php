@@ -7,11 +7,13 @@ Class Service {
     private $id          = null;
     private $name        = null;
     private $pkey        = null;
-    private $skye        = null;
+    private $skey        = null;
     private $alg         = null;
+    private $url         = null;
     private $active      = false;
     private $created     = null;
     private $last_update = null;
+    private $descrizione = null;
 
     private $ci;
 
@@ -29,17 +31,40 @@ Class Service {
     }
 
     /*
+     * Saves service based on data
+     */
+    public function save() {
+        #loading model
+        $this->ci->load->model("services_model");
+
+        if($this->id === null) {
+            #some date
+            $this->created     = time();
+            $this->last_update = time();
+
+            #insert
+            if($this->id = $this->ci->services_model->newBase($this->name, $this->pkey, $this->skey,
+                                                              $this->alg, $this->url, $this->created,
+                                                              $this->last_update)) {
+                $this->ci->services_model->addInfos($this->id, $this->descrizione);
+            }
+        } else {
+            #update
+        }
+    }
+
+    /*
      * Generates a Public Key and save it to the pkey var
      */
-    public function generatePKey() {
-        
+    public function generatePKey() : void {
+        $this->pkey = openssl_random_pseudo_bytes(128);
     }
 
     /*
      * Generates a Secret Key and save it to the skey var
      */
-    public function generateSKey() {
-
+    public function generateSKey() : void {
+        $this->skey = openssl_random_pseudo_bytes(128);
     }
 
     /*
