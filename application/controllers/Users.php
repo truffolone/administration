@@ -74,8 +74,8 @@ class Users extends CI_Controller
             }
         }
 
-         #setting up form_validation rules
-         $this->form_validation->set_rules("username", "Username", "required|is_unique[users.username]|max_length[24]|min_length[3]|alpha_dash");
+        #setting up form_validation rules
+        $this->form_validation->set_rules("username", "Username", "required|is_unique[users.username]|max_length[24]|min_length[3]|alpha_dash");
         $this->form_validation->set_rules("email", "Email", "required|is_unique[users.email]|valid_email");
         $this->form_validation->set_rules("password", "Password", "required|min_length[8]|max_length[64]|callback_password_check");
         $this->form_validation->set_rules("password_confirm", "Confrma Password", "required|matches[password]");

@@ -35,25 +35,34 @@ class Service
     /*
      * Saves service based on data
      */
-    public function save()
+    public function save() : bool
     {
         #loading model
         $this->ci->load->model("services_model");
 
         if ($this->id === null) {
             #some date
-            $this->created     = time();
-            $this->last_update = time();
+            $this->created     = date('Y-m-d H:i:s');
+            $this->last_update = date('Y-m-d H:i:s');
 
             #insert
             if ($this->id = $this->ci->services_model->newBase($this->name, $this->pkey, $this->skey,
-                                                              $this->alg, $this->url, $this->created,
+                                                              $this->alg, $this->url, $this->active, $this->created,
                                                               $this->last_update)) {
-                $this->ci->services_model->addInfos($this->id, $this->descrizione);
+            } else {
+                log_message("error", "Can't insert new service into base: " . $this->ci->db->last_query());
+                return false;
             }
         } else {
             #update
+            $this->ci->services_model->updateBase($this->id, $this->name, $this->pkey,
+                                                  $this->skey, $this->alg, $this->url,
+                                                  $this->active, $this->last_update);
         }
+        #updating infos (id is already set before)
+        $this->ci->services_model->setInfos($this->id, $this->descrizione);
+
+        return true;
     }
 
     /*
@@ -61,7 +70,8 @@ class Service
      */
     public function generatePKey() : void
     {
-        $this->pkey = openssl_random_pseudo_bytes(128);
+        $this->ci->load->library("encryption");
+        $this->pkey = bin2hex($this->ci->encryption->create_key(64));
     }
 
     /*
@@ -69,7 +79,8 @@ class Service
      */
     public function generateSKey() : void
     {
-        $this->skey = openssl_random_pseudo_bytes(128);
+        $this->ci->load->library("encryption");
+        $this->skey = bin2hex($this->ci->encryption->create_key(64));
     }
 
     /*

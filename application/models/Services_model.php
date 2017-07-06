@@ -40,7 +40,7 @@ class Services_model extends CI_Model
     /*
      * Saving base service data
      */
-    public function newBase(String $name, String $pkey, String $skey, String $alg, String $url, int $created, int $last_update) : ?int
+    public function newBase(String $name, String $pkey, String $skey, String $alg, String $url, bool $active, String $created, String $last_update) : ?int
     {
         #creating the array to insert
         $dataToInsert = array(
@@ -49,6 +49,7 @@ class Services_model extends CI_Model
             'skey'        => $skey,
             'alg'         => $alg,
             'url'         => $url,
+            'active'      => $active,
             'created'     => $created,
             'last_update' => $last_update
         );
@@ -58,5 +59,28 @@ class Services_model extends CI_Model
 
         #returning the inserted id
         return $this->db->insert_id();
+    }
+
+    /*
+     * Update base service data
+     */
+    public function updateBase(int $id, String $name, String $pkey, String $skey, String $alg, String $url, bool $active, int $last_update) : ?int
+    {
+        #creating the array to insert
+        $dataToUpdate = array(
+            'name'        => $name,
+            'pkey'        => $pkey,
+            'skey'        => $skey,
+            'alg'         => $alg,
+            'url'         => $url,
+            'active'      => $active,
+            'last_update' => $last_update
+        );
+
+        #inserting the data
+        $this->db->where("id", $id)->update("services", $dataToUpdate);
+
+        #returning the inserted id
+        return $id;
     }
 }
