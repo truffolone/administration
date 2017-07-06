@@ -1,0 +1,85 @@
+{% extends "layouts/default.twig" %}
+
+{% block head %}
+    {{ parent() }}
+
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/excite-bike/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#tabs").tabs();
+        });
+    </script>
+
+    <!-- fix for this page -->
+    <style>
+        label {
+            display: inline;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Modifica Service: {{ formValues.name }}{% endblock %}
+
+{% block content_title %}Modifica un Service: {{ formValues.name }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12" id="tabs">
+        <ul>
+            <li><a href="#tab-base">Settings</a></li>
+            <li><a href="#tab-endpoints">Endpoints</a></li>
+            <li><a href="#tab-keys">API Keys</a></li>
+            <li><a href="#tab-groups">Gruppi Abilitati</a></li>
+        </ul>
+        <div id="tab-base" class="col-md-6">
+            {{ form_open() }}
+            <div class="col-lg-12">
+                <h2 class="page-header"></h2>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="name">Nome Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-8">
+                <input type="text" name="name" class="form-control" id="name" value="{{ formValues.name }}" placeholder="Nome Service" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="algoritmo">Algoritmo Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-8">
+                <select name="algoritmo" id="algoritmo" required>
+                    {% for alg in algs %}
+                        <option value="{{ alg.code }}"{% if algoritmo == alg.code %} selected="selected"{% endif %}>{{ alg.type }} {{ alg.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="url">URL Service <span class="text-danger">*</span>:</label>
+            </div>
+            <div class="form-group col-md-8">
+                <input type="url" name="url" class="form-control" id="url" value="{{ formValues.url }}" placeholder="URL Service" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="descrizione">Descrizione:</label>
+            </div>
+            <div class="form-group col-md-8">
+                    <textarea id="descrizione" name="descrizione" class="form-control" rows="5">{{ formValues.descrizione }}</textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <input class="btn btn-default btn-info pull-right" type="submit" value="Salva le Impostazioni" id="submit">
+            </div>
+            {{ form_close() }}
+        </div>
+        <div id="tab-endpoints">
+            endpoints
+        </div>
+        <div id="tab-keys">
+            keys
+        </div>
+        <div id="tab-groups">
+            Groups permissions
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+{% endblock %}

@@ -33,6 +33,40 @@ class Service
     }
 
     /*
+     * Setup data to library service based on service id
+     */
+    public function loadFromId(int $id) : bool {
+        #loading model
+        $this->ci->load->model("services_model");
+
+        #trying to load a service based on id
+        if($ret = $this->ci->services_model->loadFromId($id)) {
+            #applying data to the object
+            $this->_apply($ret);
+
+            return true;
+        } else {
+            #saving the error
+            log_message("error", "Can't find service ID " . $id);
+            return false;
+        }
+    }
+
+    /*
+     * Deactivate the service
+     */
+    public function deactivate() : void {
+        $this->ci->services_model->setActive($this->id, false);
+    }
+
+    /*
+     * Activate the service
+     */
+    public function activate() : void {
+        $this->ci->services_model->setActive($this->id, true);
+    }
+
+    /*
      * Saves service based on data
      */
     public function save() : bool
@@ -81,6 +115,15 @@ class Service
     {
         $this->ci->load->library("encryption");
         $this->skey = bin2hex($this->ci->encryption->create_key(64));
+    }
+
+    /*
+     * Apply data to service object
+     */
+    private function _apply(stdClass $o) : void {
+        foreach($o as $a => $b) {
+            $this->$a = $b;
+        }
     }
 
     /*

@@ -22,6 +22,32 @@ class Services_model extends CI_Model
     }
 
     /*
+     * Handles active/deactive service value
+     */
+    public function setActive(int $id, bool $value) : void {
+        $this->db->where("id", $id)->update("services", ["active" => $value]);
+    }
+
+    /*
+     * Load all service data from ID
+     * @params int $id
+     * returns data row object or false on fail
+     */
+    public function loadFromId(int $id) : ?stdClass {
+        $res = $this->db->select("s.*, i. descrizione")
+                        ->from("services s")
+                        ->join("services_info i", "i.service_id = s.id", "left")
+                        ->where("s.id", $id)
+                        ->get();
+
+        if($res->num_rows() === 1) {
+            return $res->row();
+        } else {
+            return null;
+        }
+    }
+
+    /*
      * Saving or updating infos
      */
     public function setInfos(int $id, String $descrizione)

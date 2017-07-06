@@ -159,7 +159,7 @@ class Users extends CI_Controller
          #running the form
          if ($this->form_validation->run() === true) {
              #saving user data
-            $this->user->username   = $this->input->post("username");
+             $this->user->username   = $this->input->post("username");
              $this->user->email      = $this->input->post("email");
              $this->user->password   = ($this->input->post("password") && $this->user->passwordStrengthCheck($this->input->post("password"))) ? $this->input->post("password") : "";
             

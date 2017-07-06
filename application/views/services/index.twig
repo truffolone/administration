@@ -9,10 +9,36 @@
     
     <script type="text/javascript" charset="utf8" src="{{ base_url() }}public/js/datatables/datatables.min.js"></script>
 
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <script>
         $(document).ready(function(){
             $('#servicesTable').DataTable();
-            $('[data-toggle="tooltip"]').tooltip(); 
+
+            $( document ).tooltip({
+                hide: {
+                    effect: "explode",
+                    delay: 100
+                },
+                show: {
+                    effect: "slideDown",
+                    delay: 0
+                },
+                track:true
+            });
+
+            $(".deactivateService").click(function(e){
+                if(!confirm("Are you Sure?")) {
+                    e.preventDefault();
+                }
+            });
+            $(".activateService").click(function(e){
+                if(!confirm("Are you Sure?")) {
+                    e.preventDefault();
+                }
+            });
         });
     </script>
 {% endblock %}
@@ -44,15 +70,29 @@
                             <th>Created</th>
                             <th>Last Edit</th>
                             <th>Active</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for service in services %}
                             <tr>
                                 <td>{{ service.id }}</td>
-                                <td>{{ service.name }} <i data-toggle="tooltip" class="fa fa-question-circle" title="{{ service.descrizione }}"></i></td>
-                                <td><p class="text-ellipsis" data-toggle="tooltip" title="{{ service.pkey }}">{{ service.pkey }}</p></td>
-                                <td><p class="text-ellipsis" data-toggle="tooltip" title="{{ service.skey }}">{{ service.skey }}</p></td>
+                                <td>
+                                    {{ service.name }}
+                                    {% if service.descrizione | trim != "" %}
+                                     <i class="fa fa-question-circle" title="{{ service.descrizione }}"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <p class="text-ellipsis" title="{{ service.pkey }}">
+                                        {{ service.pkey | striptags | slice(0, 15) }} [...]
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class="text-ellipsis" title="{{ service.skey }}">
+                                        {{ service.skey | striptags | slice(0, 15) }} [...]
+                                    </p>
+                                </td>
                                 <td>{{ service.alg }}</td>
                                 <td>{{ service.url }}</td>
                                 <td>{{ service.created }}</td>
@@ -63,6 +103,14 @@
                                     {% else %}
                                         No
                                     {% endif %}
+                                </td>
+                                <td>
+                                    {% if service.active == 1 %}
+                                        <a href="{{ site_url('services/deactivate') }}/{{ service.id }}" class="deactivateService"><i class="fa fa-thumbs-o-down"></i></a>
+                                    {% else %}
+                                        <a href="{{ site_url('services/activate') }}/{{ service.id }}" class="activateService"><i class="fa fa-thumbs-o-up"></i></a>
+                                    {%  endif %}
+                                    <a href="{{ site_url('services/edit') }}/{{ service.id }}"><i class="fa fa-pencil-square-o"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
